@@ -16,6 +16,7 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
+        <wireui:scripts />
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
         @livewireScripts
@@ -25,8 +26,8 @@
     </head>
 
     <body>
-        @yield('body')
+        <x-notifications />
 
-        <wireui:scripts />
+        @yield('body')
     </body>
 </html>
