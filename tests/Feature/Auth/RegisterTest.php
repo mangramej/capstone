@@ -38,11 +38,16 @@ class RegisterTest extends TestCase
     {
         Event::fake();
 
+        $types = ['champion', 'requester', 'provider'];
+
+        $selectedType = $types[array_rand($types)];
+
         Livewire::test('auth.register')
             ->set('name', 'Tall Stack')
             ->set('email', 'tallstack@example.com')
             ->set('password', 'password')
             ->set('passwordConfirmation', 'password')
+            ->set('type', $selectedType)
             ->call('register')
             ->assertRedirect(route('home'));
 
@@ -132,5 +137,23 @@ class RegisterTest extends TestCase
             ->set('passwordConfirmation', 'not-password')
             ->call('register')
             ->assertHasErrors(['password' => 'same']);
+    }
+
+    /** @test */
+    public function type_is_required()
+    {
+        Livewire::test('auth.register')
+            ->set('type', '')
+            ->call('register')
+            ->assertHasErrors(['type' => 'required']);
+    }
+
+    /** @test */
+    public function type_is_a_valid_type()
+    {
+        Livewire::test('auth.register')
+            ->set('type', 'invalid')
+            ->call('register')
+            ->assertHasErrors(['type' => 'in']);
     }
 }
