@@ -26,5 +26,7 @@
 
     <body>
         @yield('body')
+
+        <wireui:scripts />
     </body>
 </html>
