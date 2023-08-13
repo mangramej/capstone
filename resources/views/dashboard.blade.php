@@ -1,10 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.requester')
 
 @section('content')
-    <div class="min-h-screen bg-gray-100 flex justify-center items-center">
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    </div>
+    <section>
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+            content
+        </div>
+    </section>
 @endsection
