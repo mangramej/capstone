@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Yajra\Address\Entities\Barangay;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -34,6 +35,36 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function registered(): static
+    {
+        return $this->withPersonalInfo()
+            ->withAddress();
+    }
+
+    public function withAddress(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'street' => fake()->streetAddress(),
+            'region_id' => '01',
+            'province_id' => '02',
+            'city_id' => '03',
+            'barangay_id' => '04',
+        ]);
+    }
+
+    public function withPersonalInfo(): static
+    {
+
+        return $this->state(fn (array $attributes) => [
+            'first_name' => fake()->firstName(),
+            'middle_name' => '',
+            'last_name' => fake()->lastName(),
+            'sex' => fake()->randomElement(['female', 'male']),
+            'date_of_birth' => fake()->date(),
+            'phone_number' => fake()->phoneNumber()
         ]);
     }
 }

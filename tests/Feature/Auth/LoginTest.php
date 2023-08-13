@@ -46,15 +46,17 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function is_redirected_to_the_home_page_after_login()
+    public function is_redirected_to_the_dashboard_page_after_login_when_fully_registered()
     {
-        $user = User::factory()->create(['password' => Hash::make('password')]);
+        $user = User::factory()
+            ->registered()
+            ->create(['password' => Hash::make('password')]);
 
         Livewire::test('auth.login')
             ->set('email', $user->email)
             ->set('password', 'password')
             ->call('authenticate')
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('dashboard'));
     }
 
     /** @test */

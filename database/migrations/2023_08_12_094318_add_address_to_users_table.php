@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('city_id', 6)->nullable()->index();
             $table->string('province_id', 4)->nullable()->index();
             $table->string('region_id', 2)->nullable()->index();
+            $table->string('zip_code')->nullable();
         });
     }
 
@@ -26,6 +27,7 @@ return new class extends Migration
                 'city_id',
                 'province_id',
                 'region_id',
+                'zip_code',
             ]);
         });
     }

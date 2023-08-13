@@ -34,7 +34,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_register()
+    public function a_user_can_register_and_redirected_to_complete_registration()
     {
         Event::fake();
 
@@ -49,7 +49,7 @@ class RegisterTest extends TestCase
             ->set('passwordConfirmation', 'password')
             ->set('type', $selectedType)
             ->call('register')
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('complete-registration'));
 
         $this->assertTrue(User::whereEmail('tallstack@example.com')->exists());
         $this->assertEquals('tallstack@example.com', Auth::user()->email);

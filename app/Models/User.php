@@ -24,6 +24,20 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+
+        'first_name',
+        'middle_name',
+        'last_name',
+        'date_of_birth',
+        'phone_number',
+        'sex',
+
+        'street',
+        'barangay_id',
+        'city_id',
+        'province_id',
+        'region_id',
+        'zip_code',
     ];
 
     /**
@@ -47,4 +61,17 @@ class User extends Authenticatable
         'type' => UserEnum::class,
         'personal_info' => PersonalInfo::class,
     ];
+
+    public function isAccountFullyRegistered(): bool
+    {
+        return $this->personal_info->hasFilled() &&
+            (
+                ! is_null($this->street) &&
+                ! is_null($this->region_id) &&
+                ! is_null($this->province_id) &&
+                ! is_null($this->city_id) &&
+                ! is_null($this->barangay_id) &&
+                ! is_null($this->zip_code)
+            );
+    }
 }

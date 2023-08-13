@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'welcome')
+    ->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -53,4 +54,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', LogoutController::class)
         ->name('logout');
+});
+
+Route::view('/complete-registration', 'private.complete-registration')
+    ->middleware(['auth', 'partial'])
+    ->name('complete-registration');
+
+Route::middleware(['auth', 'verified', 'registered'])->group(function () {
+    Route::view('/dashboard', 'dashboard')
+        ->name('dashboard');
 });
