@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Yajra\Address\Entities\Barangay;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -64,7 +63,7 @@ class UserFactory extends Factory
             'last_name' => fake()->lastName(),
             'sex' => fake()->randomElement(['female', 'male']),
             'date_of_birth' => fake()->date(),
-            'phone_number' => fake()->phoneNumber()
+            'phone_number' => fake()->phoneNumber(),
         ]);
     }
 }

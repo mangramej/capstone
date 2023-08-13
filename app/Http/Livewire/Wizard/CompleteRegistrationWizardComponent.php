@@ -11,6 +11,7 @@ use Spatie\LivewireWizard\Components\WizardComponent;
 class CompleteRegistrationWizardComponent extends WizardComponent
 {
     private User $user;
+
     public function mount(): void
     {
         $this->user = Auth::user();

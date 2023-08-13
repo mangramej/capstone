@@ -11,7 +11,8 @@ class PersonalInfo
         public ?string $phone_number,
         public ?string $sex,
         public ?string $middle_name = null,
-    ) { }
+    ) {
+    }
 
     public function hasFilled(): bool
     {

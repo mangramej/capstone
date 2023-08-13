@@ -16,15 +16,23 @@ class AddressStepComponent extends StepComponent
     use Actions;
 
     public $street;
+
     public $regions;
+
     public $provinces;
+
     public $cities;
+
     public $barangays;
+
     public $zip_code;
 
     public $selectedRegion = null;
+
     public $selectedProvince = null;
+
     public $selectedCity = null;
+
     public $selectedBarangay = null;
 
     protected $rules = [
@@ -41,7 +49,7 @@ class AddressStepComponent extends StepComponent
         'selectedProvince.required' => 'Choose at least one province.',
         'selectedCity.required' => 'Choose at least one city.',
         'selectedBarangay.required' => 'Choose at least one barangay.',
-        'zip_code' => 'The Zip Code cannot be empty.'
+        'zip_code' => 'The Zip Code cannot be empty.',
     ];
 
     public function mount(): void
@@ -83,7 +91,7 @@ class AddressStepComponent extends StepComponent
             'province_id' => $this->selectedProvince,
             'city_id' => $this->selectedCity,
             'barangay_id' => $this->selectedBarangay,
-            'zip_code' => $this->zip_code
+            'zip_code' => $this->zip_code,
         ]);
 
         $this->notification()->success(
@@ -104,7 +112,7 @@ class AddressStepComponent extends StepComponent
         return [
             'label' => 'Address Location',
             'icon' => 'globe',
-            'description' => 'Place where you currently live.'
+            'description' => 'Place where you currently live.',
         ];
     }
 }
