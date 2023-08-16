@@ -5,7 +5,6 @@ namespace App\Modules\Repositories;
 use App\Models\Requester\MilkRequest;
 use App\Models\User;
 use App\Modules\Enums\UserEnum;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class RequesterRepository
@@ -36,17 +35,5 @@ class RequesterRepository
             'phone_number' => $phoneNumber,
             'comment' => $comment,
         ]);
-    }
-
-    public function getAllMilkRequests(): Collection
-    {
-        return MilkRequest::query()
-            ->where('requester_id', $this->user->id)
-            ->get();
-    }
-
-    public function getUser(): User
-    {
-        return $this->user;
     }
 }
