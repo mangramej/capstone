@@ -61,6 +61,8 @@ Route::view('/complete-registration', 'private.complete-registration')
     ->name('complete-registration');
 
 Route::middleware(['auth', 'verified', 'registered'])->group(function () {
-    Route::view('/dashboard', 'dashboard')
-        ->name('dashboard');
+    Route::get(
+        '/dashboard',
+        fn () => view(\Illuminate\Support\Facades\Auth::user()->type->value . '.dashboard')
+    )->name('dashboard');
 });
