@@ -20,16 +20,16 @@ class DashboardController extends Controller
 
     private function requester(): View
     {
-        return view( 'requester.dashboard');
+        return view('requester.dashboard');
     }
 
     private function champion(): View
     {
-        return view( 'champion.dashboard');
+        return view('champion.dashboard');
     }
 
     private function provider(): View
     {
-        return view( 'provider.dashboard');
+        return view('provider.dashboard');
     }
 }

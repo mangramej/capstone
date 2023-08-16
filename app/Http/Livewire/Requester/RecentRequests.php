@@ -31,7 +31,7 @@ class RecentRequests extends Component
                     ->where('requester_id', Auth::id())
                     ->get()
                     ->paginate()
-                : collect()->paginate()
+                : collect()->paginate(),
         ]);
     }
 }

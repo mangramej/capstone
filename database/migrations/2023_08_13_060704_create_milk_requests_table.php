@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->longText('address');
             $table->string('phone_number');
-//            $table->string('image_id');
+            //            $table->string('image_id');
             $table->longText('comment')->nullable();
             $table->timestamps();
         });

@@ -3,7 +3,6 @@
 namespace App\Models\Requester;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -16,8 +15,8 @@ class MilkRequest extends Model
         'quantity',
         'address',
         'phone_number',
-//        'image_id',
-        'comment'
+        //        'image_id',
+        'comment',
     ];
 
     public function requester(): BelongsTo

@@ -12,7 +12,7 @@ class RequesterRepository
 {
     private User $user;
 
-    public function __construct(?int $id = null)
+    public function __construct(int $id = null)
     {
         $this->user = ($id)
             ? User::where('type', UserEnum::Requester)->findOrFail($id)
@@ -25,9 +25,8 @@ class RequesterRepository
         int $quantity,
         string $address,
         string $phoneNumber,
-        ?string $comment = null
-    ): MilkRequest
-    {
+        string $comment = null
+    ): MilkRequest {
         return MilkRequest::create([
             'requester_id' => $this->user->id,
             'mother_name' => $motherName,
@@ -35,7 +34,7 @@ class RequesterRepository
             'quantity' => $quantity,
             'address' => $address,
             'phone_number' => $phoneNumber,
-            'comment' => $comment
+            'comment' => $comment,
         ]);
     }
 

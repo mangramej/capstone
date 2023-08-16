@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Requester;
 
-use App\Models\User;
 use App\Modules\Repositories\RequesterRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +13,15 @@ class SendMilkRequest extends Component
     use Actions;
 
     public $mother_name;
+
     public $quantity;
+
     public $baby_name;
+
     public $phone_number;
 
     public $comment;
+
     public $agreed;
 
     protected $rules = [
@@ -55,8 +58,8 @@ class SendMilkRequest extends Component
                 motherName: $this->mother_name,
                 babyName: $this->baby_name,
                 quantity: $this->quantity,
-                address:  Auth::user()->address(),
-                phoneNumber:  $this->phone_number,
+                address: Auth::user()->address(),
+                phoneNumber: $this->phone_number,
                 comment: $this->comment
             );
 
