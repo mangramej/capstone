@@ -66,6 +66,8 @@ class SendMilkRequest extends Component
         );
 
         $this->dispatchBrowserEvent('close');
+
+        $this->emit('NewMilkRequestEvent');
     }
 
     public function render(): View

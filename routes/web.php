@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -61,8 +62,6 @@ Route::view('/complete-registration', 'private.complete-registration')
     ->name('complete-registration');
 
 Route::middleware(['auth', 'verified', 'registered'])->group(function () {
-    Route::get(
-        '/dashboard',
-        fn () => view(\Illuminate\Support\Facades\Auth::user()->type->value . '.dashboard')
-    )->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)
+        ->name('dashboard');
 });

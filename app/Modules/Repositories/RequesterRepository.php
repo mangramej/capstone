@@ -5,6 +5,7 @@ namespace App\Modules\Repositories;
 use App\Models\Requester\MilkRequest;
 use App\Models\User;
 use App\Modules\Enums\UserEnum;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class RequesterRepository
@@ -38,14 +39,10 @@ class RequesterRepository
         ]);
     }
 
-
-    /**
-     * @return array<int, MilkRequest>
-     */
-    public function getAllMilkRequests(): array
+    public function getAllMilkRequests(): Collection
     {
         return MilkRequest::query()
-            ->where('requester_id')
+            ->where('requester_id', $this->user->id)
             ->get();
     }
 
