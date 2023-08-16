@@ -60,13 +60,23 @@
                             </svg>
                         </button>
 
-                        <a
+                        <button
+                            x-data=""
+                            x-on:click.prevent="$dispatch('open-modal', 'send_request_modal')"
                             href="#"
                             class="block shrink-0 rounded-lg bg-white px-4 p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
                         >
                             <span class="sr-only">Academy</span>
                             Send a Request
-                        </a>
+                        </button>
+
+                        <x-breeze-modal name="send_request_modal">
+                            <livewire:requester.send-milk-request />
+                        </x-breeze-modal>
+
+
+
+
 
 {{-- NOTIFICATION                       --}}
 {{--                        <a--}}

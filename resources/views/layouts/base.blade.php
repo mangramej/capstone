@@ -29,5 +29,7 @@
         <x-notifications />
 
         @yield('body')
+
+        @stack('scripts')
     </body>
 </html>

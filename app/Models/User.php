@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Yajra\Address\HasAddress;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasAddress;
 
     /**
      * The attributes that are mass assignable.
@@ -73,5 +74,25 @@ class User extends Authenticatable
                 ! is_null($this->barangay_id) &&
                 ! is_null($this->zip_code)
             );
+    }
+
+    public function fullname(): string
+    {
+        return sprintf("%s %s %s",
+            $this->first_name,
+            $this->middle_name ?? '',
+            $this->last_name
+        );
+    }
+
+    public function address(): string
+    {
+        return sprintf("%s %s, %s, %s, %s",
+            $this->street,
+            $this->barangay->name,
+            $this->city->name,
+            $this->province->name,
+            $this->zip_code
+        );
     }
 }
