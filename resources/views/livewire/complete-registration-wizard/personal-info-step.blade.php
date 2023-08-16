@@ -23,7 +23,7 @@
                         wire:model.defer="sex"
                     >
                         <x-select.option label="Female" value="female"/>
-                        <x-select.option label="Male" value="2" female/>
+                        <x-select.option label="Male" value="male"/>
                     </x-select>
 
                     <x-datetime-picker
