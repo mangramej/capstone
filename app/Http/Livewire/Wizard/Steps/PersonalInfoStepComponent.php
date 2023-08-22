@@ -21,15 +21,12 @@ class PersonalInfoStepComponent extends StepComponent
 
     public ?string $phone_number = '';
 
-    public ?string $sex = '';
-
     protected $rules = [
         'first_name' => ['required', 'string', 'min:2', 'max:255'],
         'middle_name' => ['nullable', 'string', 'max:255'],
         'last_name' => ['required', 'string', 'min:2', 'max:255'],
         'date_of_birth' => ['required', 'date'],
         'phone_number' => ['required', 'string', 'max:255'],
-        'sex' => ['required', 'in:female,male'],
     ];
 
     public function save(): void

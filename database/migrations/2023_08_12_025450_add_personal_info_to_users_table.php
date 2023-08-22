@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('sex')->nullable();
         });
     }
 
@@ -33,7 +32,6 @@ return new class extends Migration
                 'last_name',
                 'date_of_birth',
                 'phone_number',
-                'sex',
             ]);
         });
     }

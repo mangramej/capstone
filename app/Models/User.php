@@ -31,7 +31,6 @@ class User extends Authenticatable
         'last_name',
         'date_of_birth',
         'phone_number',
-        'sex',
 
         'street',
         'barangay_id',

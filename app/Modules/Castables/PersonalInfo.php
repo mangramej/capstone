@@ -21,7 +21,6 @@ class PersonalInfo implements Castable
                     last_name: $attributes['last_name'],
                     date_of_birth: $attributes['date_of_birth'],
                     phone_number: $attributes['phone_number'],
-                    sex: $attributes['sex'],
                     middle_name: $attributes['middle_name'],
                 );
             }
@@ -38,7 +37,6 @@ class PersonalInfo implements Castable
                     'last_name' => $value->last_name,
                     'date_of_birth' => $value->date_of_birth,
                     'phone_number' => $value->phone_number,
-                    'sex' => $value->sex,
                 ];
             }
         };
