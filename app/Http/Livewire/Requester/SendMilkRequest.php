@@ -33,11 +33,11 @@ class SendMilkRequest extends Component
         'baby_name' => ['required', 'string', 'max:255'],
         'phone_number' => ['required', 'max:255'],
         'comment' => ['nullable', 'string', 'max:255'],
-        'image' => ['required', 'image', 'max:12000']
+        'image' => ['required', 'image', 'max:12000'],
     ];
 
     protected $messages = [
-        'image.required' => 'You must upload an image of your ID.'
+        'image.required' => 'You must upload an image of your ID.',
     ];
 
     public function mount(): void
