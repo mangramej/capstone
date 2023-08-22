@@ -15,17 +15,17 @@ class SendMilkRequest extends Component
 
     public $mother_name;
 
-    public $quantity;
+    public $quantity = 1;
 
-    public $baby_name;
+    public $baby_name = '';
 
     public $phone_number;
 
-    public $comment;
+    public $comment = '';
 
-    public $agreed;
+    public $agreed = false;
 
-    public $image;
+    public $image = null;
 
     protected $rules = [
         'mother_name' => ['required', 'string', 'max:255'],
@@ -43,11 +43,7 @@ class SendMilkRequest extends Component
     public function mount(): void
     {
         $this->mother_name = Auth::user()->fullname();
-        $this->quantity = 1;
-        $this->baby_name = '';
         $this->phone_number = Auth::user()->phone_number;
-        $this->comment = '';
-        $this->agreed = false;
     }
 
     public function updatedImage(): void
