@@ -24,6 +24,7 @@ class RequesterRepository
         int $quantity,
         string $address,
         string $phoneNumber,
+//        string $image,
         string $comment = null
     ): MilkRequest {
         return MilkRequest::create([
@@ -33,6 +34,7 @@ class RequesterRepository
             'quantity' => $quantity,
             'address' => $address,
             'phone_number' => $phoneNumber,
+//            'image' => $image,
             'comment' => $comment,
         ]);
     }

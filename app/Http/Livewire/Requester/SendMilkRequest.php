@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Requester;
 
-use App\Modules\Repositories\RequesterRepository;
+use App\Models\Requester\MilkRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -25,7 +25,7 @@ class SendMilkRequest extends Component
 
     public $agreed;
 
-    public $attachment;
+    public $image;
 
     protected $rules = [
         'mother_name' => ['required', 'string', 'max:255'],
@@ -33,28 +33,26 @@ class SendMilkRequest extends Component
         'baby_name' => ['required', 'string', 'max:255'],
         'phone_number' => ['required', 'max:255'],
         'comment' => ['nullable', 'string', 'max:255'],
-        'attachment' => ['required', 'image', 'max:12000']
+        'image' => ['required', 'image', 'max:12000']
     ];
 
     protected $messages = [
-        'attachment.required' => 'You must upload an image of your ID.'
+        'image.required' => 'You must upload an image of your ID.'
     ];
 
     public function mount(): void
     {
-        $requester = Auth::user();
-
-        $this->mother_name = $requester->fullname();
+        $this->mother_name = Auth::user()->fullname();
         $this->quantity = 1;
         $this->baby_name = '';
-        $this->phone_number = $requester->phone_number;
+        $this->phone_number = Auth::user()->phone_number;
         $this->comment = '';
         $this->agreed = false;
     }
 
-    public function updatedAttachment(): void
+    public function updatedImage(): void
     {
-        $this->validate(['attachment' => 'required|image|max:12000']);
+        $this->validate(['image' => 'required|image|max:12000']);
     }
 
     public function save(): void
@@ -64,17 +62,19 @@ class SendMilkRequest extends Component
 
             return;
         }
-        $this->validate();
 
-        (new RequesterRepository)
-            ->newMilkRequest(
-                motherName: $this->mother_name,
-                babyName: $this->baby_name,
-                quantity: $this->quantity,
-                address: Auth::user()->address(),
-                phoneNumber: $this->phone_number,
-                comment: $this->comment
-            );
+        $validated = $this->validate();
+
+        $filename = $this->image->store('/user-'.Auth::id(), 'attachments');
+
+        MilkRequest::create(array_merge(
+            $validated,
+            [
+                'image' => basename($filename),
+                'requester_id' => Auth::id(),
+                'address' => Auth::user()->address,
+            ]
+        ));
 
         $this->notification()->success(
             title: __('requester.sent.title'),

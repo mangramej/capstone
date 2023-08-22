@@ -25,12 +25,12 @@
                         Upload ID *
                     </span>
 
-                    <x-filepond wire:model="attachment" file-type="['image/*']" preview />
+                    <x-filepond wire:model="image" file-type="['image/*']" preview />
 
                     <span>
-                        @if($errors->get('attachment'))
+                        @if($errors->get('image'))
                             <ul class='text-sm text-red-600 space-y-1'>
-                                @foreach ((array) $errors->get('attachment') as $message)
+                                @foreach ((array) $errors->get('image') as $message)
                                     <li>{{ $message }}</li>
                                 @endforeach
                             </ul>

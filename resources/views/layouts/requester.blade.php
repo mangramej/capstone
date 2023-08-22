@@ -21,7 +21,7 @@
                             Send a Request
                         </button>
 
-                        <x-breeze-modal name="send_request_modal">
+                        <x-breeze-modal name="send_request_modal" :show="true">
                             <livewire:requester.send-milk-request />
                         </x-breeze-modal>
 

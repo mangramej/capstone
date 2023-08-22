@@ -15,7 +15,7 @@ class MilkRequest extends Model
         'quantity',
         'address',
         'phone_number',
-        //        'image_id',
+        'image',
         'comment',
     ];
 
