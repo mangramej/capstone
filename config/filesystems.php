@@ -29,6 +29,13 @@ return [
     */
 
     'disks' => [
+        'attachments' => [
+            'driver' => 'local',
+            'root' => storage_path('app/attachments'),
+            'url' => env('APP_URL').'/attachments',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         'local' => [
             'driver' => 'local',
@@ -70,7 +77,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+//        public_path('storage') => storage_path('app/public'),
+        public_path('attachments') => storage_path('app/attachments'),
     ],
 
 ];
