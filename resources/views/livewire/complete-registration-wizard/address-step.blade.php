@@ -8,6 +8,19 @@
             <p class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">
                 {{ $this->stepInfo()['description'] }}
             </p>
+
+            <p class="mt-1 text-sm text-center text-gray-600 leading-5 max-w">
+                or click here to
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                   class="font-medium text-indigo-600 hover:underline hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    sign out
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </p>
         </div>
 
         <div class="mt-12">
