@@ -6,11 +6,12 @@ use App\Modules\Repositories\RequesterRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use WireUi\Traits\Actions;
 
 class SendMilkRequest extends Component
 {
-    use Actions;
+    use Actions, WithFileUploads;
 
     public $mother_name;
 
@@ -24,12 +25,19 @@ class SendMilkRequest extends Component
 
     public $agreed;
 
+    public $attachment;
+
     protected $rules = [
         'mother_name' => ['required', 'string', 'max:255'],
         'quantity' => ['required', 'numeric'],
         'baby_name' => ['required', 'string', 'max:255'],
         'phone_number' => ['required', 'max:255'],
         'comment' => ['nullable', 'string', 'max:255'],
+        'attachment' => ['required', 'image', 'max:12000']
+    ];
+
+    protected $messages = [
+        'attachment.required' => 'You must upload an image of your ID.'
     ];
 
     public function mount(): void
@@ -42,6 +50,11 @@ class SendMilkRequest extends Component
         $this->phone_number = $requester->phone_number;
         $this->comment = '';
         $this->agreed = false;
+    }
+
+    public function updatedAttachment(): void
+    {
+        $this->validate(['attachment' => 'required|image|max:12000']);
     }
 
     public function save(): void

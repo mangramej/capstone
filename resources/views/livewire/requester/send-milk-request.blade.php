@@ -21,38 +21,21 @@
 
                 {{-- Valid ID --}}
                 <div class="col-span-3 sm:col-span-2">
-                    <span class="text-start text-sm w-full font-medium text-gray-700 dark:text-gray-400">Upload ID *</span>
+                    <span class="text-start text-sm w-full font-medium text-gray-700 dark:text-gray-400">
+                        Upload ID *
+                    </span>
 
-                    <div class="mb-4 bg-gray-100 border-2 border-gray-300 border-dashed rounded-md appearance-none hover:border-gray-400 focus:outline-none hidden"
-                         id="preview-image-container"
-                    >
-                        <img
-                            src="https://placehold.co/450x300"
-                            id="preview-image"
-                            class="mx-auto w-[450px] h-[300px] my-4 object-contain hidden"
-                            x-cloak
-                            alt="preview-image"
-                        >
-                    </div>
+                    <x-filepond wire:model="attachment" file-type="['image/*']" preview />
 
-                    <label
-                        class="flex justify-center w-full h-16 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                            <span class="flex items-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none"
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                                </svg>
-                                <span class="font-medium text-gray-600">
-                                    Click here to
-                                    <span class="text-cyan-600 underline">browse</span>
-                                </span>
-                            </span>
-                        <input type="file" name="image" class="hidden" id="select-image">
-                    </label>
-
-                    {{--                <x-input-error :messages="$errors->get('image')" class="mt-2"/>--}}
+                    <span>
+                        @if($errors->get('attachment'))
+                            <ul class='text-sm text-red-600 space-y-1'>
+                                @foreach ((array) $errors->get('attachment') as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </span>
                 </div>
 
                 {{-- Address --}}
@@ -94,27 +77,3 @@
         </x-slot>
     </form>
 </x-card>
-
-@push('scripts')
-    <script>
-        const previewImage = document.getElementById('preview-image')
-        const selectImage = document.getElementById('select-image')
-        const previewImageContainer = document.getElementById('preview-image-container')
-
-        selectImage.onchange = () => {
-            previewImage.style.display = 'block';
-            const [file] = selectImage.files
-
-            if (file) {
-                previewImage.src = URL.createObjectURL(file)
-                previewImage.classList.remove('hidden')
-                previewImageContainer.classList.remove('hidden')
-            } else {
-                previewImage.classList.add('hidden')
-                previewImageContainer.classList.add('hidden')
-                previewImage.src = ''
-                previewImage.style.display = null
-            }
-        }
-    </script>
-@endpush
