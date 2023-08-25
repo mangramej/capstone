@@ -5,6 +5,7 @@ namespace App\Models\Requester;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class MilkRequest extends Model
 {
@@ -32,5 +33,12 @@ class MilkRequest extends Model
     public function provider(): BelongsTo
     {
         return $this->belongsTo(User::class, 'provided_by');
+    }
+
+    public function getImageUrl(): string
+    {
+        return '/attachments/user-' . auth()->id() . '/'. $this->image;
+
+//        return Storage::disk('attachments')->url("/user-$this->id/$this->image");
     }
 }

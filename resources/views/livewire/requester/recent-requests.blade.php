@@ -57,7 +57,7 @@
 
                         </td>
                         <td class="whitespace-nowrap text-end px-4 text-gray-700">
-                            <x-button xs primary label="View More"/>
+                            <x-button xs primary href="{{ route('requester.milk-request-detail', [$request]) }}" label="View More"/>
                         </td>
                     </tr>
                 @empty

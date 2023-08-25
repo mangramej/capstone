@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MilkRequestDetailController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -64,4 +65,10 @@ Route::view('/complete-registration', 'private.complete-registration')
 Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::get('/dashboard', DashboardController::class)
         ->name('dashboard');
+
+    Route::name('requester.')->group(function () {
+        Route::get('/milk-request-detail/{milkRequest}', MilkRequestDetailController::class)
+            ->name('milk-request-detail');
+    });
+
 });
