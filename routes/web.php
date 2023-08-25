@@ -71,5 +71,5 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
         ->group(function () {
             Route::get('/my-request/{milkRequest}/detail', MilkRequestDetailController::class)
                 ->name('milk-request-detail');
-    });
+        });
 });

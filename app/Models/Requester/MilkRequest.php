@@ -37,8 +37,8 @@ class MilkRequest extends Model
 
     public function getImageUrl(): string
     {
-        return '/attachments/user-' . auth()->id() . '/'. $this->image;
+        return '/attachments/user-'.auth()->id().'/'.$this->image;
 
-//        return Storage::disk('attachments')->url("/user-$this->id/$this->image");
+        //        return Storage::disk('attachments')->url("/user-$this->id/$this->image");
     }
 }
