@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckUserTypeMiddleware;
 use App\Http\Middleware\RedirectIfUserAlreadyFullyRegistered;
 use App\Http\Middleware\VerifyIfUserIsFullyRegistered;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'registered' => VerifyIfUserIsFullyRegistered::class,
         'partial' => RedirectIfUserAlreadyFullyRegistered::class,
+        'type' => CheckUserTypeMiddleware::class,
     ];
 }
