@@ -66,9 +66,10 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::get('/dashboard', DashboardController::class)
         ->name('dashboard');
 
-    Route::name('requester.')->group(function () {
-        Route::get('/milk-request-detail/{milkRequest}', MilkRequestDetailController::class)
-            ->name('milk-request-detail');
+    Route::middleware('type:requester')
+        ->name('requester.')
+        ->group(function () {
+            Route::get('/my-request/{milkRequest}/detail', MilkRequestDetailController::class)
+                ->name('milk-request-detail');
     });
-
 });
