@@ -85,7 +85,7 @@ class User extends Authenticatable
 
     public function address(): string
     {
-        return sprintf('%s %s, %s, %s, %s',
+        return sprintf('%s, %s, %s, %s, %s',
             $this->street,
             $this->barangay->name,
             $this->city->name,
