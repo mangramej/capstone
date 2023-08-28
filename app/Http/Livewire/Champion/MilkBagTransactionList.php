@@ -31,7 +31,7 @@ class MilkBagTransactionList extends Component
                     ->where('champion_id', Auth::id())
                     ->paginate()
                     ->withQueryString()
-                : collect()->paginate()
+                : collect()->paginate(),
         ]);
     }
 }

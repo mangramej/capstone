@@ -20,7 +20,7 @@ class MilkBagController extends Controller
         $championProvider->load(['transactions', 'provider:id,first_name,middle_name,last_name,email']);
 
         return view('champion.transaction-detail', [
-            'milk_bag' => $championProvider
+            'milk_bag' => $championProvider,
         ]);
     }
 }

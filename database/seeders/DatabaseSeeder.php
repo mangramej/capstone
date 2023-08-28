@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             ->registered()
             ->type(UserEnum::Champion)
             ->create([
-                'email' => 'champion@test.com'
+                'email' => 'champion@test.com',
             ]);
     }
 }

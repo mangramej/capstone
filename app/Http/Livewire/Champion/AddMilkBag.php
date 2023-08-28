@@ -17,6 +17,7 @@ class AddMilkBag extends Component
     use WithAlert;
 
     public $quantity = 1;
+
     public $selectedProvider;
 
     protected $rules = [

@@ -27,7 +27,7 @@ class MilkBagTotalCount extends Component
                 ? ChampionProvider::query()
                     ->where('champion_id', Auth::id())
                     ->sum('total_milk_bags')
-                : 0
+                : 0,
         ]);
     }
 }

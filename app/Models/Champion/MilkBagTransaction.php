@@ -2,7 +2,6 @@
 
 namespace App\Models\Champion;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MilkBagTransaction extends Model

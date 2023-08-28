@@ -6,7 +6,6 @@ use App\Models\Champion\ChampionProvider;
 use App\Models\Champion\MilkBagTransaction;
 use App\Models\User;
 use App\Modules\Enums\UserEnum;
-use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
 class ChampionRepository
@@ -60,7 +59,7 @@ class ChampionRepository
             $transaction = MilkBagTransaction::create([
                 'owner_id' => $milkBag->id,
                 'type' => 'added',
-                'quantity' => $quantity
+                'quantity' => $quantity,
             ]);
 
             $milkBag->total_milk_bags += $transaction->quantity;
