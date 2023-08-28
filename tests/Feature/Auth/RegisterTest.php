@@ -43,7 +43,6 @@ class RegisterTest extends TestCase
         $selectedType = $types[array_rand($types)];
 
         Livewire::test('auth.register')
-            ->set('name', 'Tall Stack')
             ->set('email', 'tallstack@example.com')
             ->set('password', 'password')
             ->set('passwordConfirmation', 'password')
@@ -55,15 +54,6 @@ class RegisterTest extends TestCase
         $this->assertEquals('tallstack@example.com', Auth::user()->email);
 
         Event::assertDispatched(Registered::class);
-    }
-
-    /** @test */
-    public function name_is_required()
-    {
-        Livewire::test('auth.register')
-            ->set('name', '')
-            ->call('register')
-            ->assertHasErrors(['name' => 'required']);
     }
 
     /** @test */
