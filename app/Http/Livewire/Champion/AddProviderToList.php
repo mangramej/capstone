@@ -54,7 +54,7 @@ class AddProviderToList extends Component
     public function render(): View
     {
         $providers = User::select([
-            'id', DB::raw("CONCAT(first_name, ' ', last_name) AS name"),
+            'id', 'email', DB::raw("CONCAT(first_name, ' ', last_name) AS name"),
         ])
             ->where('type', UserEnum::Provider)
             ->whereNotExists(function ($query) {

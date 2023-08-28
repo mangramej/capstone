@@ -8,6 +8,7 @@
                 :options="$providers"
                 option-label="name"
                 option-value="id"
+                option-description="email"
                 wire:model.defer="selectedProvider"
             />
         </div>

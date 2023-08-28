@@ -8,12 +8,12 @@
 
 
         <div class="mt-2 bg-gray-100 p-4 rounded">
-            <p class="flex gap-2 text-sm text-green-600">
-                <span class="font-medium"> {{ $stats['total_active_provider_count'] }} - Active  </span>
+            <p class="flex gap-2 text-sm text-gray-600">
+                <span class="font-medium"> {{ $stats['total_active_provider_count'] }} - <span class="text-green-600">Active</span>  </span>
             </p>
 
-            <p class="flex gap-2 text-sm text-red-600">
-                <span class="font-medium"> {{ $stats['total_inactive_provider_count'] }} - Inactive  </span>
+            <p class="flex gap-2 text-sm text-gray-600">
+                <span class="font-medium"> {{ $stats['total_inactive_provider_count'] }} - <span class="text-red-600">Inactive</span>  </span>
             </p>
         </div>
 
