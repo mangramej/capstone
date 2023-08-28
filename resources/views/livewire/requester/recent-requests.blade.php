@@ -25,7 +25,7 @@
                 <thead>
                 <tr class="bg-gray-100">
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                        Baby Name
+                        Reference Number
                     </th>
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                         Date
@@ -45,7 +45,7 @@
                 @forelse($milk_requests as $request)
                     <tr>
                         <td class="whitespace-nowrap p-4 font-medium text-gray-900">
-                            {{ $request->baby_name }}
+                            {{ $request->ref_number }}
                         </td>
                         <td class="whitespace-nowrap p-4 text-gray-600">
                             {{ $request->created_at->format('m/d/Y') }}

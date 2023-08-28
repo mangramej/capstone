@@ -25,6 +25,11 @@
                         <div class="flow-root">
                             <dl class="-my-3 divide-y divide-gray-100 text-sm">
                                 <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                                    <dt class="font-medium text-gray-900">Reference Number</dt>
+                                    <dd class="text-gray-700 sm:col-span-2 font-bold">{{ $milkRequest->ref_number }}</dd>
+                                </div>
+
+                                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                                     <dt class="font-medium text-gray-900">Mother Name</dt>
                                     <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->mother_name }}</dd>
                                 </div>
