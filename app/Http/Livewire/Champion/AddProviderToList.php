@@ -60,6 +60,9 @@ class AddProviderToList extends Component
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('champion_providers')
+                    // Provider is not constrained
+                    // to a single champion
+                    ->where('champion_providers.champion_id', Auth::id()) // comment this to constrain
                     ->whereColumn('champion_providers.provider_id', 'users.id');
             })
             ->get();
