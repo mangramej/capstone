@@ -46,7 +46,7 @@ class UserFactory extends Factory
     public function type(UserEnum $type): static
     {
         return $this->state(fn (array $attributes) => [
-            'type' => $type
+            'type' => $type,
         ]);
     }
 
@@ -58,7 +58,7 @@ class UserFactory extends Factory
             'province_id' => '02',
             'city_id' => '03',
             'barangay_id' => '04',
-            'zip_code' => '1234'
+            'zip_code' => '1234',
         ]);
     }
 

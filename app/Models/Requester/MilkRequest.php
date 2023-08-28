@@ -49,7 +49,7 @@ class MilkRequest extends Model
             $date = $milkRequest->created_at->format('mdy');
             $id = $milkRequest->id;
 
-            $milkRequest->ref_number = $prefix . $date . $id;
+            $milkRequest->ref_number = $prefix.$date.$id;
 
             $milkRequest->save();
         });
