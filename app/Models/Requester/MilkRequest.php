@@ -41,4 +41,17 @@ class MilkRequest extends Model
 
         //        return Storage::disk('attachments')->url("/user-$this->id/$this->image");
     }
+
+    protected static function booted(): void
+    {
+        static::created(function (MilkRequest $milkRequest) {
+            $prefix = strtoupper($milkRequest->mother_name[0].$milkRequest->baby_name[0]);
+            $date = $milkRequest->created_at->format('mdy');
+            $id = $milkRequest->id;
+
+            $milkRequest->ref_number = $prefix . $date . $id;
+
+            $milkRequest->save();
+        });
+    }
 }
