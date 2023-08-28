@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Champion\MyProvidersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MilkRequestDetailController;
 use App\Http\Livewire\Auth\Login;
@@ -71,5 +72,12 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
         ->group(function () {
             Route::get('/my-request/{milkRequest}/detail', MilkRequestDetailController::class)
                 ->name('milk-request-detail');
+        });
+
+    Route::middleware('type:champion')
+        ->name('champion.')
+        ->group(function () {
+            Route::get('/my-providers', MyProvidersController::class)
+                ->name('my-providers');
         });
 });

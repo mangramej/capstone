@@ -40,7 +40,7 @@
                         <div class="flex space-x-4 items-center h-full">
                             <x-nav-link title="Dashboard" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
                             <x-nav-link title="Milk Bag" href="#" :active="false" />
-                            <x-nav-link title="Providers" href="#" :active="false" />
+                            <x-nav-link title="Providers" href="{{ route('champion.my-providers') }}" :active="request()->routeIs('champion.my-providers')" />
                             <x-nav-link title="Messages" href="#" :active="false" />
                         </div>
                     </div>
@@ -70,6 +70,7 @@
                             To: "transform opacity-0 scale-95"
                         -->
                         <div
+                            x-cloak
                             x-show="profile"
                             x-transition:enter="transition ease-out duration-200"
                             x-transition:enter-start="opacity-0 scale-95"

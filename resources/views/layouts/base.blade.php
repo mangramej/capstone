@@ -26,7 +26,7 @@
     </head>
 
     <body class="bg-gray-100">
-        <x-notifications />
+        <x-notifications position="bottom-right" />
 
         @yield('body')
 
