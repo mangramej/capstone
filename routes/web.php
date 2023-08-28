@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MilkRequestDetailController;
@@ -79,5 +80,11 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
         ->group(function () {
             Route::get('/my-providers', MyProvidersController::class)
                 ->name('my-providers');
+
+            Route::get('/milk-bag', [MilkBagController::class, 'index'])
+                ->name('milk-bag.index');
+
+            Route::get('/milk-bag/{championProvider}/detail', [MilkBagController::class, 'show'])
+                ->name('milk-bag.show');
         });
 });

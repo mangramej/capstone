@@ -3,6 +3,7 @@
 namespace App\Modules\Repositories;
 
 use App\Models\Champion\ChampionProvider;
+use App\Models\Champion\MilkBagTransaction;
 use App\Models\User;
 use App\Modules\Enums\UserEnum;
 use Illuminate\Support\Facades\DB;
@@ -45,17 +46,28 @@ class ChampionRepository
         return $this;
     }
 
-    public function getAllProvider(): array
+    public function addMilkBagTransaction(User $provider, int $quantity): static
     {
-        return User::select([
-            'id', DB::raw("CONCAT(first_name, ' ', last_name) AS name"),
-        ])
-            ->where('type', UserEnum::Provider)
-            ->whereExists(function ($query) {
-                $query->select(DB::raw(1))
-                    ->from('champion_providers')
-                    ->where('champion_providers.champion_id', $this->champion->id)
-                    ->whereColumn('champion_providers.provider_id', 'users.id');
-            })->get();
+        if ($provider->type !== UserEnum::Provider) {
+            throw new InvalidArgumentException('User must be a type of Provider.');
+        }
+
+        $milkBag = ChampionProvider::where('provider_id', $provider->id)
+            ->where('champion_id', $this->champion->id)
+            ->first();
+
+        if ($milkBag) {
+            $transaction = MilkBagTransaction::create([
+                'owner_id' => $milkBag->id,
+                'type' => 'added',
+                'quantity' => $quantity
+            ]);
+
+            $milkBag->total_milk_bags += $transaction->quantity;
+
+            $milkBag->save();
+        }
+
+        return $this;
     }
 }

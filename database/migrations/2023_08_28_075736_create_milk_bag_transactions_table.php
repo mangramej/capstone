@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Champion\ChampionProvider;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('champion_providers', function (Blueprint $table) {
+        Schema::create('milk_bag_transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'champion_id');
-            $table->foreignIdFor(User::class, 'provider_id');
-            $table->boolean('status')->default(true);
-            $table->integer('total_milk_bags')->default(0);
+            $table->foreignIdFor(ChampionProvider::class, 'owner_id');
+            $table->string('type');
+            $table->integer('quantity');
+            $table->string('milk_request_ref_number')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('champion_providers');
+        Schema::dropIfExists('milk_bag_transactions');
     }
 };
