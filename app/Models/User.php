@@ -6,9 +6,11 @@ namespace App\Models;
 use App\Modules\Castables\PersonalInfo;
 use App\Modules\Enums\UserEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Yajra\Address\Entities\Barangay;
 use Yajra\Address\HasAddress;
 
 class User extends Authenticatable
@@ -92,5 +94,10 @@ class User extends Authenticatable
             $this->province->name,
             $this->zip_code
         );
+    }
+
+    public function barangay(): BelongsTo
+    {
+        return $this->belongsTo(config('address.model.barangay', Barangay::class), 'barangay_id', 'id')->withDefault();
     }
 }
