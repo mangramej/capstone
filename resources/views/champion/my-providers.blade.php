@@ -11,7 +11,7 @@
                         amber label="Add Provider"
                     />
 
-                    <x-breeze-modal name="add_provider_modal">
+                    <x-breeze-modal name="add_provider_modal" disableOverflow>
                         <livewire:champion.add-provider-to-list />
                     </x-breeze-modal>
                 </div>
