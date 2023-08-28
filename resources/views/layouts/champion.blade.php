@@ -107,7 +107,7 @@
             <div class="space-y-1 px-2 pb-3 pt-2">
                 <x-nav-link title="Dashboard" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
                 <x-nav-link title="Milk Bag" href="#" :active="false" />
-                <x-nav-link title="Providers" href="#" :active="false" />
+                <x-nav-link title="Providers" href="{{ route('champion.my-providers') }}" :active="request()->routeIs('champion.my-providers')" />
                 <x-nav-link title="Messages" href="#" :active="false" />
             </div>
         </div>
