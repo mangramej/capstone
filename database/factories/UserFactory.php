@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Modules\Enums\UserEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -40,6 +41,13 @@ class UserFactory extends Factory
     {
         return $this->withPersonalInfo()
             ->withAddress();
+    }
+
+    public function type(UserEnum $type): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'type' => $type
+        ]);
     }
 
     public function withAddress(): static
