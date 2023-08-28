@@ -49,7 +49,7 @@
                     >
                         <div class="flex flex-col items-center">
                             <small class="text-xs text-gray-800">
-                                {{ auth()->user()->getAddressAttribute() . ', ' . auth()->user()->zip_code }}
+                                {{ auth()->user()->address() }}
                             </small>
                         </div>
                     </label>
