@@ -10,12 +10,6 @@
                 <x-select.option label="All" value="all"/>
                 <x-select.option label="Pending" value="pending"/>
             </x-select>
-            <x-select
-                placeholder="Date"
-            >
-                <x-select.option label="All" value="all"/>
-                <x-select.option label="Last 3 Months" value="past-three-months"/>
-            </x-select>
         </div>
     </div>
 

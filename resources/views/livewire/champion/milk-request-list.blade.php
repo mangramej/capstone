@@ -13,12 +13,6 @@
                 <x-select.option label="Accepted" value="{{ \App\Modules\Enums\MilkRequestStatus::Accepted }}"/>
                 <x-select.option label="Declined" value="declined"/>
             </x-select>
-            <x-select
-                placeholder="Date"
-            >
-                <x-select.option label="All" value="all"/>
-                <x-select.option label="Last 3 Months" value="past-three-months"/>
-            </x-select>
         </div>
     </div>
 
