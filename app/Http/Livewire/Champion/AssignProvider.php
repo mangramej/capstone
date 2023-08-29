@@ -66,6 +66,7 @@ class AssignProvider extends Component
             );
 
             $this->dispatchBrowserEvent('close');
+
         } catch (InsufficientBagException) {
             $this->addError('selectedProvider', 'Insufficient milk bag, try another provider.');
 

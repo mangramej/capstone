@@ -11,8 +11,10 @@
             >
                 <x-select.option label="Pending" value="{{ \App\Modules\Enums\MilkRequestStatus::Pending }}"/>
                 <x-select.option label="Accepted" value="{{ \App\Modules\Enums\MilkRequestStatus::Accepted }}"/>
-                <x-select.option label="Declined" value="declined"/>
                 <x-select.option label="Assigned" value="{{ \App\Modules\Enums\MilkRequestStatus::Assigned }}"/>
+                <x-select.option label="Delivered" value="{{ \App\Modules\Enums\MilkRequestStatus::Delivered }}"/>
+                <x-select.option label="Confirmed" value="{{ \App\Modules\Enums\MilkRequestStatus::Confirmed }}"/>
+                <x-select.option label="Declined" value="declined"/>
             </x-select>
         </div>
     </div>
