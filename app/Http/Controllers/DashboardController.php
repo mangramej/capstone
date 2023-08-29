@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Champion\ChampionProvider;
-use App\Models\Champion\MilkBagTransaction;
 use App\Models\Requester\MilkRequest;
 use App\Modules\Enums\MilkRequestStatus;
 use App\Modules\Enums\UserEnum;
