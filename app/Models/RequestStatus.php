@@ -16,4 +16,12 @@ class RequestStatus extends Model
         'delivered_at',
         'confirmed_at',
     ];
+
+    protected $casts = [
+        'pending_at' => 'datetime',
+        'accepted_at' => 'datetime',
+        'assigned_at' => 'datetime',
+        'delivered_at' => 'datetime',
+        'confirmed_at' => 'datetime',
+    ];
 }

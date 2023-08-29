@@ -46,7 +46,7 @@ class MilkRequestPolicy
      */
     public function update(User $user, MilkRequest $milkRequest): bool
     {
-        return ($user->type !== UserEnum::Champion) && ($user->id === $milkRequest->accepted_by);
+        return ($user->type === UserEnum::Champion) && ($user->id === $milkRequest->accepted_by);
     }
 
     /**

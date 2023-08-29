@@ -4,8 +4,10 @@ namespace App\Modules\Repositories;
 
 use App\Models\Champion\ChampionProvider;
 use App\Models\Champion\MilkBagTransaction;
+use App\Models\Requester\MilkRequest;
 use App\Models\User;
 use App\Modules\Enums\UserEnum;
+use App\Modules\Exceptions\InsufficientBagException;
 use InvalidArgumentException;
 
 class ChampionRepository
@@ -66,6 +68,34 @@ class ChampionRepository
 
             $milkBag->save();
         }
+
+        return $this;
+    }
+
+    /**
+     * @throws InsufficientBagException
+     */
+    public function deductMilkBag(MilkRequest $milkRequest, User $provider): static
+    {
+
+        $milkBag = ChampionProvider::where('provider_id', $provider->id)
+            ->where('champion_id', $this->champion->id)
+            ->first();
+
+        if ($milkBag->total_milk_bags < $milkRequest->quantity) {
+            throw new InsufficientBagException;
+        }
+
+        $transaction = MilkBagTransaction::create([
+            'owner_id' => $milkBag->id,
+            'type' => 'deduct',
+            'quantity' => $milkRequest->quantity,
+            'milk_request_ref_number' => $milkRequest->ref_number
+        ]);
+
+        $milkBag->total_milk_bags -= $transaction->quantity;
+
+        $milkBag->save();
 
         return $this;
     }

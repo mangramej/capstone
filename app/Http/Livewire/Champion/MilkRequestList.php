@@ -32,23 +32,24 @@ class MilkRequestList extends Component
             'milk_requests' => $this->readyToLoad
                 ? MilkRequest::query()
                     ->when(true, function ($query) {
-                        if ($this->status === MilkRequestStatus::Pending->value) {
-                            $query->where('status', $this->status);
-                            $query->whereNull('accepted_by');
-                            $query->whereDoesntHave('declines', function ($q) {
-                                $q->where('declined_by', Auth::id());
-                            });
-                        }
+                        switch ($this->status) {
+                            case MilkRequestStatus::Pending->value:
+                                $query->where('status', $this->status);
+                                $query->whereNull('accepted_by');
+                                $query->whereDoesntHave('declines', function ($q) {
+                                    $q->where('declined_by', Auth::id());
+                                });
+                                break;
 
-                        if ($this->status === MilkRequestStatus::Accepted->value) {
-                            $query->where('status', $this->status);
-                            $query->where('accepted_by', Auth::id());
-                        }
+                            case 'declined':
+                                $query->whereHas('declines', function ($q) {
+                                    $q->where('declined_by', Auth::id());
+                                });
+                                break;
 
-                        if ($this->status === 'declined') {
-                            $query->whereHas('declines', function ($q) {
-                                $q->where('declined_by', Auth::id());
-                            });
+                            default:
+                                $query->where('status', $this->status);
+                                $query->where('accepted_by', Auth::id());
                         }
                     })
                     ->get()

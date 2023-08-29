@@ -43,7 +43,12 @@ class AcceptDeclineMilkRequest extends Component
             'accepted_at' => now(),
         ]);
 
-        return redirect()->route('champion.milk-request-detail', [$this->milkRequest]);
+        $this->alert(
+            type: 'success',
+            title: 'Milk Request Update',
+            description: 'The request has been set to accepted.',
+            event: 'UpdateMilkRequestEvent'
+        );
     }
 
     public function decline()
