@@ -37,6 +37,6 @@ class ThreadController extends Controller
             ]);
         }
 
-        return redirect()->route('thread.messages', [$thread]);
+        return redirect()->route('threads.messages', [$thread]);
     }
 }
