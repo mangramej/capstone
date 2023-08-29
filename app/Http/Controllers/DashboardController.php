@@ -61,7 +61,7 @@ class DashboardController extends Controller
             'total_assigned_milk_request',
             'total_delivered_milk_request',
             'total_confirmed_milk_request',
-            'total_provider'
+            'total_provider',
         ]));
     }
 

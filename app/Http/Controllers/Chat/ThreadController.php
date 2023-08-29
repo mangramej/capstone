@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Thread;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
