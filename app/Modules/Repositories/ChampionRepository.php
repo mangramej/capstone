@@ -90,7 +90,7 @@ class ChampionRepository
             'owner_id' => $milkBag->id,
             'type' => 'deduct',
             'quantity' => $milkRequest->quantity,
-            'milk_request_ref_number' => $milkRequest->ref_number
+            'milk_request_ref_number' => $milkRequest->ref_number,
         ]);
 
         $milkBag->total_milk_bags -= $transaction->quantity;

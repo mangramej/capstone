@@ -20,6 +20,7 @@ class AssignProvider extends Component
     use WithAlert, AuthorizesRequests;
 
     public $providers;
+
     public MilkRequest $milkRequest;
 
     public $selectedProvider;
@@ -65,12 +66,11 @@ class AssignProvider extends Component
             );
 
             $this->dispatchBrowserEvent('close');
-        }
-
-        catch (InsufficientBagException) {
+        } catch (InsufficientBagException) {
             $this->addError('selectedProvider', 'Insufficient milk bag, try another provider.');
 
             DB::rollBack();
+
             return;
         }
     }
@@ -78,8 +78,8 @@ class AssignProvider extends Component
     public function render(): View
     {
         $this->providers = User::select([
-                'id', 'email', DB::raw("CONCAT(first_name, ' ', last_name) AS name"),
-            ])
+            'id', 'email', DB::raw("CONCAT(first_name, ' ', last_name) AS name"),
+        ])
             ->where('type', UserEnum::Provider)
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))
