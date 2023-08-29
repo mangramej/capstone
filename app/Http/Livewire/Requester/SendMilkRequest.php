@@ -68,7 +68,7 @@ class SendMilkRequest extends Component
             [
                 'image' => basename($filename),
                 'requester_id' => Auth::id(),
-                'address' => Auth::user()->address,
+                'address' => Auth::user()->address(),
             ]
         ));
 
