@@ -11,7 +11,15 @@
                 </div>
 
                 <div class="flex flex-1 items-center gap-8 justify-end">
-                    <div class="flex gap-4">
+                    <div class="flex gap-1">
+                        <a
+                            href="{{ route('dashboard') }}"
+                            class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
+                        >
+                            <span class="sr-only">Home</span>
+                            <x-icon name="home" class="h-5 w-5"/>
+                        </a>
+
                         <button
                             x-data=""
                             x-on:click.prevent="$dispatch('open-modal', 'send_request_modal')"
@@ -25,26 +33,13 @@
                             <livewire:requester.send-milk-request/>
                         </x-breeze-modal>
 
-                        {{--                        <a--}}
-                        {{--                            href="#"--}}
-                        {{--                            class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"--}}
-                        {{--                        >--}}
-                        {{--                            <span class="sr-only">Notifications</span>--}}
-                        {{--                            <svg--}}
-                        {{--                                xmlns="http://www.w3.org/2000/svg"--}}
-                        {{--                                class="h-5 w-5"--}}
-                        {{--                                fill="none"--}}
-                        {{--                                viewBox="0 0 24 24"--}}
-                        {{--                                stroke="currentColor"--}}
-                        {{--                                stroke-width="2"--}}
-                        {{--                            >--}}
-                        {{--                                <path--}}
-                        {{--                                    stroke-linecap="round"--}}
-                        {{--                                    stroke-linejoin="round"--}}
-                        {{--                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"--}}
-                        {{--                                />--}}
-                        {{--                            </svg>--}}
-                        {{--                        </a>--}}
+                        <a
+                            href="{{ route('threads.index') }}"
+                            class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
+                        >
+                            <span class="sr-only">Messages</span>
+                            <x-icon name="chat" class="h-5 w-5"/>
+                        </a>
 
                         <div x-data="{ isActive: false }" class="relative w-full">
                             <button

@@ -13,11 +13,25 @@
 
                             @if($milkRequest->accepted_by === auth()->id())
                                 <x-button
-                                    icon="arrow-down"
+                                    icon="document-download"
                                     href="{{ route('champion.milk-request.download', $milkRequest) }}"
                                     dark label="Download"
                                 />
                             @endif
+
+                            <div>
+                                <form action="{{ route('threads.create', [$milkRequest->requester]) }}"
+                                      method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <x-button
+                                        type="submit"
+                                        icon="chat"
+                                        dark label="Message"
+                                    />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

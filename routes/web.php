@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
+use App\Http\Controllers\Chat\MessageController;
+use App\Http\Controllers\Chat\ThreadController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MilkRequestDetailController;
 use App\Http\Controllers\MilkRequestReceiptController;
@@ -68,6 +70,13 @@ Route::view('/complete-registration', 'private.complete-registration')
 Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::get('/dashboard', DashboardController::class)
         ->name('dashboard');
+
+    Route::get('/t', [ThreadController::class, 'index'])->name('threads.index');
+    Route::put('/t/{user}', [ThreadController::class, 'create'])->name('threads.create');
+
+    Route::get('/t/{thread}', [MessageController::class, 'show'])->name('threads.messages');
+
+    Route::post('/t/{thread}/send-message', [MessageController::class, 'send'])->name('threads.message.send');
 
     Route::middleware('type:requester')
         ->name('requester.')

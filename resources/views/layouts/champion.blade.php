@@ -41,7 +41,7 @@
                             <x-nav-link title="Dashboard" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
                             <x-nav-link title="Milk Bag" href="{{ route('champion.milk-bag.index') }}" :active="request()->routeIs('champion.milk-bag.*')" />
                             <x-nav-link title="Providers" href="{{ route('champion.my-providers') }}" :active="request()->routeIs('champion.my-providers')" />
-                            <x-nav-link title="Messages" href="#" :active="false" />
+                            <x-nav-link title="Messages" href="{{ route('threads.index') }}" :active="request()->routeIs('threads.*')" />
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                 <x-nav-link title="Dashboard" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" />
                 <x-nav-link title="Milk Bag" href="{{ route('champion.milk-bag.index') }}" :active="request()->routeIs('champion.milk-bag.*')" />
                 <x-nav-link title="Providers" href="{{ route('champion.my-providers') }}" :active="request()->routeIs('champion.my-providers')" />
-                <x-nav-link title="Messages" href="#" :active="false" />
+                <x-nav-link title="Messages" href="{{ route('threads.index') }}" :active="request()->routeIs('threads.*')" />
             </div>
         </div>
     </nav>
