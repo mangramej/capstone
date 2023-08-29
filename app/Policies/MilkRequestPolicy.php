@@ -13,11 +13,24 @@ class MilkRequestPolicy
      */
     public function view(User $user, MilkRequest $milkRequest): bool
     {
-        return match ($user->type) {
-            UserEnum::Requester => $milkRequest->requester_id === $user->id,
-            UserEnum::Champion => $milkRequest->accepted_by === $user->id,
-            UserEnum::Provider => false,
-        };
+        if ($user->type === UserEnum::Requester) {
+            return $milkRequest->requester_id === $user->id;
+        }
+
+        if ($user->type === UserEnum::Champion) {
+            $isDecline = $milkRequest->whereHas('declines', function ($query) use ($user, $milkRequest) {
+                $query->where('milk_request_id', $milkRequest->id);
+                $query->where('declined_by', $user->id);
+            })->exists();
+
+            if (is_null($milkRequest->accepted_by) && ! $isDecline) {
+                return true;
+            }
+
+            return $milkRequest->accepted_by === $user->id;
+        }
+
+        return false;
     }
 
     /**
@@ -31,10 +44,10 @@ class MilkRequestPolicy
     /**
      * Determine whether the user can update the model.
      */
-    //    public function update(User $user, MilkRequest $milkRequest): bool
-    //    {
-    //        //
-    //    }
+    public function update(User $user, MilkRequest $milkRequest): bool
+    {
+        return ($user->type !== UserEnum::Champion) && ($user->id === $milkRequest->accepted_by);
+    }
 
     /**
      * Determine whether the user can delete the model.

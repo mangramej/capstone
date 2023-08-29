@@ -11,6 +11,6 @@ class MilkRequestDetailController extends Controller
     {
         $this->authorize('view', $milkRequest);
 
-        return view('requester.milk-request-detail', compact('milkRequest'));
+        return view("{$request->user()->type->value}.milk-request-detail", compact('milkRequest'));
     }
 }

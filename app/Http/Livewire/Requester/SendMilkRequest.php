@@ -63,7 +63,7 @@ class SendMilkRequest extends Component
 
         $filename = $this->image->store('/user-'.Auth::id(), 'attachments');
 
-        MilkRequest::create(array_merge(
+        $milkRequest = MilkRequest::create(array_merge(
             $validated,
             [
                 'image' => basename($filename),

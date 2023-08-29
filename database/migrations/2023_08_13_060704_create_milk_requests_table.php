@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('milk_requests', function (Blueprint $table) {
             $table->id();
             $table->string('ref_number')->nullable();
+            $table->string('status')->default('pending');
             $table->foreignIdFor(User::class, 'requester_id');
             $table->foreignIdFor(User::class, 'accepted_by')->nullable();
             $table->foreignIdFor(User::class, 'provided_by')->nullable();

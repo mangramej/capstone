@@ -1,4 +1,4 @@
-<div class="p-4" wire:init="loadMilkRequests">
+<div class="p-4" wire:init="load">
     <h1 class="font-medium text-lg">Recent Requests</h1>
 
     <div class="w-full lg:w-2/3 mt-4">
@@ -6,9 +6,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
             <x-select
                 placeholder="Status"
+                wire:model="status"
+                :clearable="false"
             >
-                <x-select.option label="All" value="all"/>
-                <x-select.option label="Pending" value="pending"/>
+                <x-select.option label="Pending" value="{{ \App\Modules\Enums\MilkRequestStatus::Pending }}"/>
+                <x-select.option label="Accepted" value="{{ \App\Modules\Enums\MilkRequestStatus::Accepted }}"/>
+                <x-select.option label="Declined" value="declined"/>
             </x-select>
             <x-select
                 placeholder="Date"
@@ -33,11 +36,15 @@
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                         Bags
                     </th>
-                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                        Status
-                    </th>
-                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                    </th>
+                    @if($status !== 'declined')
+                        <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
+                            Status
+                        </th>
+                        <th class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
+                            Action
+                        </th>
+                    @endif
+
                 </tr>
                 </thead>
 
@@ -48,17 +55,20 @@
                             {{ $request->ref_number }}
                         </td>
                         <td class="whitespace-nowrap p-4 text-gray-600">
-                            {{ $request->created_at->format('m/d/Y') }}
+                            {{ $request->created_at->format('m/d/Y h:i A') }}
                         </td>
                         <td class="whitespace-nowrap p-4 text-gray-700 font-bold">
                             {{ $request->quantity }}
                         </td>
-                        <td class="whitespace-nowrap p-4 text-gray-700">
-                            <x-status-badge :status="$request->status" />
-                        </td>
-                        <td class="whitespace-nowrap text-end px-4 text-gray-700">
-                            <x-button xs primary href="{{ route('requester.milk-request-detail', [$request]) }}" label="View More"/>
-                        </td>
+                        @if($status !== 'declined')
+                            <td class="whitespace-nowrap p-4 text-gray-700">
+                                <x-status-badge :status="$request->status"/>
+                            </td>
+                            <td class="whitespace-nowrap text-end px-4 text-gray-700">
+                                <x-button xs primary href="{{ route('champion.milk-request-detail', [$request]) }}"
+                                          label="View More"/>
+                            </td>
+                        @endif
                     </tr>
                 @empty
                     <tr>

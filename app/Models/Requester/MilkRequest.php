@@ -2,13 +2,22 @@
 
 namespace App\Models\Requester;
 
+use App\Models\DeclinedRequest;
+use App\Models\RequestStatus;
 use App\Models\User;
+use App\Modules\Enums\MilkRequestStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 
 class MilkRequest extends Model
 {
+    protected $attributes = [
+        'status' => MilkRequestStatus::Pending,
+    ];
+
     protected $fillable = [
         'requester_id',
         'mother_name',
@@ -18,6 +27,10 @@ class MilkRequest extends Model
         'phone_number',
         'image',
         'comment',
+    ];
+
+    protected $casts = [
+        'status' => MilkRequestStatus::class,
     ];
 
     public function requester(): BelongsTo
@@ -37,9 +50,19 @@ class MilkRequest extends Model
 
     public function getImageUrl(): string
     {
-        return '/attachments/user-'.auth()->id().'/'.$this->image;
+        return '/attachments/user-'.$this->requester_id.'/'.$this->image;
 
         //        return Storage::disk('attachments')->url("/user-$this->id/$this->image");
+    }
+
+    public function declines(): HasMany
+    {
+        return $this->hasMany(DeclinedRequest::class);
+    }
+
+    public function statuses(): HasOne
+    {
+        return $this->hasOne(RequestStatus::class);
     }
 
     protected static function booted(): void
@@ -52,6 +75,10 @@ class MilkRequest extends Model
             $milkRequest->ref_number = $prefix.$date.$id;
 
             $milkRequest->save();
+
+            $milkRequest->statuses()->create([
+                'pending_at' => $milkRequest->created_at,
+            ]);
         });
     }
 }

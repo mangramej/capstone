@@ -71,7 +71,7 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::middleware('type:requester')
         ->name('requester.')
         ->group(function () {
-            Route::get('/my-request/{milkRequest}/detail', MilkRequestDetailController::class)
+            Route::get('/my-request/{milkRequest:ref_number}', MilkRequestDetailController::class)
                 ->name('milk-request-detail');
         });
 
@@ -86,5 +86,8 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::get('/milk-bag/{championProvider}/detail', [MilkBagController::class, 'show'])
                 ->name('milk-bag.show');
+
+            Route::get('/milk-request/{milkRequest:ref_number}', MilkRequestDetailController::class)
+                ->name('milk-request-detail');
         });
 });
