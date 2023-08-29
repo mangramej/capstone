@@ -8,8 +8,14 @@
                     <div class="flex justify-between items-center">
                         <x-button sm secondary label="Go Back" href="{{ url()->previous() }}"/>
 
-                        <div>
+                        <div class="flex items-center space-x-2">
                             <livewire:champion.update-request-status :milkRequest="$milkRequest" />
+
+                            <x-button
+                                icon="arrow-down"
+                                href="{{ route('champion.milk-request.download', $milkRequest) }}"
+                                dark label="Download"
+                            />
                         </div>
                     </div>
                 </div>

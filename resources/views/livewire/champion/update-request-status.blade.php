@@ -4,6 +4,7 @@
 
     @elseif($milkRequest->status === \App\Modules\Enums\MilkRequestStatus::Accepted)
         <x-button
+            icon="user"
             x-data=""
             x-on:click.prevent="$dispatch('open-modal', 'assign_provider_modal')"
             primary label="Assign Provider"

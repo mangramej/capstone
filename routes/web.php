@@ -6,6 +6,7 @@ use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MilkRequestDetailController;
+use App\Http\Controllers\MilkRequestReceiptController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -89,5 +90,8 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::get('/milk-request/{milkRequest:ref_number}', MilkRequestDetailController::class)
                 ->name('milk-request-detail');
+
+            Route::get('/download/milk-request/{milkRequest}', MilkRequestReceiptController::class)
+                ->name('milk-request.download');
         });
 });
