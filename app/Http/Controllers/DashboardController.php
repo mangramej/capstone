@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Champion\ChampionProvider;
+use App\Models\Champion\MilkBagTransaction;
 use App\Models\Requester\MilkRequest;
 use App\Modules\Enums\MilkRequestStatus;
 use App\Modules\Enums\UserEnum;
@@ -72,6 +73,13 @@ class DashboardController extends Controller
 
     private function provider(): View
     {
-        return view('provider.dashboard');
+        $milk_bags = ChampionProvider::with('champion:id,first_name,middle_name,last_name,email')
+            ->withSum(['transactions' => function ($query) {
+                $query->where('type', 'added');
+            }], 'quantity')
+            ->where('provider_id', Auth::id())
+            ->get();
+
+        return view('provider.dashboard', compact('milk_bags'));
     }
 }
