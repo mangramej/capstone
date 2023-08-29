@@ -18,7 +18,7 @@
         @break
 
     @case(MilkRequestStatus::Delivered)
-        <x-badge rounded info label="Delivered" />
+        <x-badge rounded violet label="Delivered" />
         @break
 
     @case(MilkRequestStatus::Confirmed)
