@@ -71,6 +71,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::get('/dashboard', DashboardController::class)
         ->name('dashboard');
 
+    Route::view('/profile', 'private.profile')
+        ->name('profile');
+
     Route::get('/t', [ThreadController::class, 'index'])->name('threads.index');
     Route::put('/t/{user}', [ThreadController::class, 'create'])->name('threads.create');
 
