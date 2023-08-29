@@ -5,12 +5,11 @@ namespace App\Http\Livewire\Champion;
 use App\Models\Requester\MilkRequest;
 use App\Modules\Traits\WithAlert;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class UpdateRequestStatus extends Component
 {
-    use WithAlert, AuthorizesRequests;
+    use WithAlert;
 
     public MilkRequest $milkRequest;
 
