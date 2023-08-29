@@ -11,11 +11,13 @@
                         <div class="flex items-center space-x-2">
                             <livewire:champion.update-request-status :milkRequest="$milkRequest" />
 
-                            <x-button
-                                icon="arrow-down"
-                                href="{{ route('champion.milk-request.download', $milkRequest) }}"
-                                dark label="Download"
-                            />
+                            @if($milkRequest->accepted_by === auth()->id())
+                                <x-button
+                                    icon="arrow-down"
+                                    href="{{ route('champion.milk-request.download', $milkRequest) }}"
+                                    dark label="Download"
+                                />
+                            @endif
                         </div>
                     </div>
                 </div>
