@@ -14,9 +14,8 @@
                     </div>
                 </div>
 
-                <div class="col-span-1 lg:col-span-2 space-y-4 px-4 sm:p-0">
+                <div class="col-span-1 lg:col-span-2 space-y-4 sm:p-0">
                     <x-card title="Milk Request Details">
-
                         <div class="flow-root">
                             <dl class="-my-3 divide-y divide-gray-100 text-sm">
                                 <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
