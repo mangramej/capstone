@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Champion\ChampionProvider;
 use App\Models\Requester\MilkRequest;
+use App\Models\User;
 use App\Modules\Enums\MilkRequestStatus;
 use App\Modules\Enums\UserEnum;
 use Illuminate\Contracts\View\View;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
             UserEnum::Champion => $this->champion(),
             UserEnum::Requester => $this->requester(),
             UserEnum::Provider => $this->provider(),
+            UserEnum::Admin => $this->admin($request),
         };
     }
 
@@ -80,5 +82,20 @@ class DashboardController extends Controller
             ->get();
 
         return view('provider.dashboard', compact('milk_bags'));
+    }
+
+    private function admin(Request $request): View
+    {
+        $data = collect([
+            'user' => [
+                'count' => User::count(),
+                //                'growth' => User::count()
+            ],
+            //            'request' => [
+            //                'count' => MilkRequest::count(),
+            //            ],
+        ])->dot()->all();
+
+        return view('admin.dashboard', compact('data'));
     }
 }

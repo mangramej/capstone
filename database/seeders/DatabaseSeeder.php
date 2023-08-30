@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AddressSeeder::class,
+            AdminSeeder::class,
             //            ProviderSeeder::class,
         ]);
         //

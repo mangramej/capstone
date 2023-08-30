@@ -7,4 +7,6 @@ enum UserEnum: string
     case Champion = 'champion';
     case Requester = 'requester';
     case Provider = 'provider';
+
+    case Admin = 'admin';
 }

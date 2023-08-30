@@ -23,20 +23,25 @@ class UpdateAccountInformation extends Component
 
     public $newPasswordConfirmation;
 
+    public User $user;
+
+    public function mount(User $user = null): void
+    {
+        $this->user = $user ?? Auth::user();
+    }
+
     public function save(): void
     {
         $this->validate([
             'email' => ['nullable', 'email', Rule::unique(User::class)->ignore(Auth::id())],
         ]);
 
-        $user = Auth::user();
-
         if (! is_null($this->email)) {
-            $user->email = $this->email;
+            $this->user->email = $this->email;
         }
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
+        if ($this->user->isDirty('email')) {
+            $this->user->email_verified_at = null;
         }
 
         if (! is_null($this->currentPassword)) {
@@ -51,10 +56,10 @@ class UpdateAccountInformation extends Component
 
             $validator->validate();
 
-            $user->password = Hash::make($this->newPassword);
+            $this->user->password = Hash::make($this->newPassword);
         }
 
-        $user->save();
+        $this->user->save();
 
         $this->alert(
             type: 'success',
@@ -67,7 +72,7 @@ class UpdateAccountInformation extends Component
 
     public function render(): View
     {
-        $this->email = Auth::user()->email;
+        $this->email = $this->user->email;
 
         return view('livewire.profile.update-account-information');
     }

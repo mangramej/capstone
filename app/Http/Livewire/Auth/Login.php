@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Modules\Enums\UserEnum;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -29,6 +30,10 @@ class Login extends Component
             $this->addError('email', trans('auth.failed'));
 
             return;
+        }
+
+        if (Auth::user()->type === UserEnum::Admin) {
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return redirect()->intended(route('dashboard'));

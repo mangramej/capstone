@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\MilkBagController;
@@ -66,6 +68,23 @@ Route::middleware('auth')->group(function () {
 Route::view('/complete-registration', 'private.complete-registration')
     ->middleware(['auth', 'partial'])
     ->name('complete-registration');
+
+Route::middleware(['auth', 'verified', 'type:admin'])
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/admin/dashboard', DashboardController::class)
+            ->name('dashboard');
+
+        Route::view('/admin/profile', 'admin.profile')
+            ->name('profile');
+
+        Route::resource('users', UserController::class)->only('index', 'show', 'update');
+
+        Route::get('/admins', [AdminController::class, 'index'])->name('admin.index');
+        Route::post('/admins', [AdminController::class, 'store'])->name('admin.store');
+        Route::get('/admins/{user}/show', [AdminController::class, 'show'])->name('admin.show');
+        Route::patch('/admin/{user}', [AdminController::class, 'update'])->name('admin.update');
+    });
 
 Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::get('/dashboard', DashboardController::class)

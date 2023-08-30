@@ -7,15 +7,17 @@ use App\Modules\Castables\PersonalInfo;
 use App\Modules\Enums\UserEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Yajra\Address\Entities\Barangay;
 use Yajra\Address\HasAddress;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasAddress;
+    use HasApiTokens, HasFactory, Notifiable, HasAddress, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'email',
         'password',
         'type',
@@ -98,5 +101,10 @@ class User extends Authenticatable
     public function barangay(): BelongsTo
     {
         return $this->belongsTo(config('address.model.barangay', Barangay::class), 'barangay_id', 'id')->withDefault();
+    }
+
+    public function modelHasRole(): MorphOne
+    {
+        return $this->morphOne('App\Models\ModelHasRole', 'model');
     }
 }
