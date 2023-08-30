@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Enums\UserEnum;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
@@ -28,6 +29,10 @@ class EmailVerificationController extends Controller
             event(new Verified(Auth::user()));
         }
 
-        return redirect(route('home'));
+        if (Auth::user()->type === UserEnum::Admin) {
+            return redirect(route('admin.dashboard'));
+        }
+
+        return redirect(route('dashboard'));
     }
 }
