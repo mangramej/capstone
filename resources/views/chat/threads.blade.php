@@ -30,13 +30,10 @@
                                class="w-full h-full inline-flex items-center px-6 py-2 ">
 
                                 {{--                        @if($t->participants[0]->user?->image)--}}
-                                {{--                            <img src="{{  asset('storage/'. $t->participants[0]->user?->image) }}" height="50px"--}}
-                                {{--                                 width="50px" class="rounded-full bg-gray-100">--}}
-                                {{--                            --}}
-                                {{--                        @endif--}}
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($t->participants[0]->user->fullname()) }}&background=0D8ABC&color=fff" height="50px"
+                                     width="50px" class="rounded-full bg-gray-100">
 
-                                <div class="w-[50px] h-[50px] rounded-full bg-gray-100">
-                                </div>
+                                {{--                        @endif--}}
 
                                 <div class="ml-4">
                                     <h3 class="font-semibold text-sm">

@@ -17,10 +17,10 @@
 
                 <div class="bg-white rounded-xl shadow">
                     <div class="w-full px-6 py-2 border-b inline-flex items-center">
-                        @if($thread->participants[0]->user?->image)
-                            <img src="{{ asset('storage/'. $thread->participants[0]->user?->image) }}" width="50px"
-                                 height="50px" class="rounded-full border" alt="">
-                        @endif
+                        <img
+                            src="https://ui-avatars.com/api/?name={{ urlencode($thread->participants[0]->user->fullname()) }}&background=0D8ABC&color=fff"
+                            width="50px"
+                            height="50px" class="rounded-full border" alt="">
 
                         <p class="text-lg font-semibold text-gray-700 ml-2">
                             {{ $thread->participants[0]->user->fullname() }}
