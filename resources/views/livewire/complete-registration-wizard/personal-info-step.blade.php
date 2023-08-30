@@ -39,7 +39,7 @@
                         wire:model.defer="date_of_birth"
                     />
 
-                    <x-inputs.phone wire:model.defer="phone_number" label="Phone Number *"/>
+                    <x-input wire:model.defer="phone_number" label="Phone Number *" />
                 </div>
 
                 <div class="text-end">
