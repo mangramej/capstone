@@ -15,11 +15,12 @@
 @section('content')
     <section>
         <div class="mx-auto max-w-screen-xl py-8 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3">
-                <div class="col-span-1 lg:col-span-2 space-y-4 px-4 sm:p-0">
-
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div class="lg:col-span-3">
                     <x-button sm secondary label="Go Back" href="{{ url()->previous() }}"/>
+                </div>
 
+                <div class="col-span-1 lg:col-span-2 space-y-4 px-4 sm:p-0">
                     <x-card title="Milk Request Details">
 
                         <div class="flow-root">
@@ -71,6 +72,10 @@
                         </div>
 
                     </x-card>
+                </div>
+
+                <div>
+                    @include('requester.partial.request-status-activity', ['status' => $milkRequest->statuses])
                 </div>
             </div>
         </div>
