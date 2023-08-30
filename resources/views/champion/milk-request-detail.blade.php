@@ -11,14 +11,6 @@
                         <div class="flex items-center space-x-2">
                             <livewire:champion.update-request-status :milkRequest="$milkRequest" />
 
-                            @if($milkRequest->accepted_by === auth()->id())
-                                <x-button
-                                    icon="document-download"
-                                    href="{{ route('champion.milk-request.download', $milkRequest) }}"
-                                    dark label="Download"
-                                />
-                            @endif
-
                             <div>
                                 <form action="{{ route('threads.create', [$milkRequest->requester]) }}"
                                       method="POST">

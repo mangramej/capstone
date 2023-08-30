@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AddressSeeder::class,
-            ProviderSeeder::class,
+//            ProviderSeeder::class,
         ]);
-
-        User::factory()
-            ->registered()
-            ->type(UserEnum::Champion)
-            ->create([
-                'email' => 'champion@test.com',
-            ]);
+//
+//        User::factory()
+//            ->registered()
+//            ->type(UserEnum::Champion)
+//            ->create([
+//                'email' => 'champion@test.com',
+//            ]);
     }
 }
