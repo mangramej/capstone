@@ -5,24 +5,28 @@
         <div class="mx-auto max-w-screen-xl py-8 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div class="col-span-1 lg:col-span-3">
-                    <div class="flex justify-between items-center">
-                        <x-button sm secondary label="Go Back" href="{{ url()->previous() }}"/>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-button sm secondary label="Go Back" href="{{ url()->previous() }}"/>
+                        </div>
 
-                        <div class="flex items-center space-x-2">
-                            <livewire:champion.update-request-status :milkRequest="$milkRequest" />
+                        <div>
+                            <div class="flex justify-end items-center gap-2">
+                                <livewire:champion.update-request-status :milkRequest="$milkRequest" />
 
-                            <div>
-                                <form action="{{ route('threads.create', [$milkRequest->requester]) }}"
-                                      method="POST">
-                                    @csrf
-                                    @method('PUT')
+                                <div>
+                                    <form action="{{ route('threads.create', [$milkRequest->requester]) }}"
+                                          method="POST">
+                                        @csrf
+                                        @method('PUT')
 
-                                    <x-button
-                                        type="submit"
-                                        icon="chat"
-                                        dark label="Message"
-                                    />
-                                </form>
+                                        <x-button.circle
+                                            type="submit"
+                                            icon="chat"
+                                            info
+                                        />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
