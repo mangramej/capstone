@@ -86,6 +86,9 @@
                             <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1"
                                id="user-menu-item-0">Profile</a>
 
+                            <a href="{{ route('champion.reports.milk-requests') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1"
+                               id="user-menu-item-0">Reports</a>
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button

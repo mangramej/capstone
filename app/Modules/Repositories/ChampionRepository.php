@@ -77,7 +77,6 @@ class ChampionRepository
      */
     public function deductMilkBag(MilkRequest $milkRequest, User $provider): static
     {
-
         $milkBag = ChampionProvider::where('provider_id', $provider->id)
             ->where('champion_id', $this->champion->id)
             ->first();
@@ -94,7 +93,9 @@ class ChampionRepository
         ]);
 
         $milkBag->total_milk_bags -= $transaction->quantity;
+        $milkRequest->provided_by = $provider->id;
 
+        $milkRequest->save();
         $milkBag->save();
 
         return $this;
