@@ -23,6 +23,9 @@
 
         <div class="col-span-2 px-4 ">
             <form wire:submit.prevent="export">
+                <p class="mt-1.5 text-sm text-gray-500">
+                    Select the fields that you want to include:
+                </p>
                 <div class="space-y-4 w-full">
                     <x-select
                         label="Select Status"
