@@ -11,7 +11,7 @@ class ProviderSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->count(25)
+            ->count(10)
             ->type(UserEnum::Provider)
             ->registered()
             ->create();
