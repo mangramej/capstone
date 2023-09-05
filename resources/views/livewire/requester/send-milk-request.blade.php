@@ -54,7 +54,7 @@
                         </div>
                     </label>
 
-                    <a href="#"
+                    <a href="{{ route('profile') }}"
                        class="text-cyan-600 hover:underline text-xs text-start w-full mt-1">Update current
                         address</a>
                 </div>
