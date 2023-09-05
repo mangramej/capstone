@@ -73,7 +73,7 @@
     </nav>
 
 
-    <div style="background-image: url('{{ url('/images/bg.png') }}')"
+    <div style="background-image: url('{{ url('/images/new-bg.png') }}')"
          class="bg-cover bg-center h-[300px] sm:h-[500px] md:h-[700px]">
     </div>
 
