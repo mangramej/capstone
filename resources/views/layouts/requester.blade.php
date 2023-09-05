@@ -50,34 +50,32 @@
                             </button>
 
                             <div
-                                class="absolute end-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-lg"
-                                role="menu"
                                 x-cloak
-                                x-transition
                                 x-show="isActive"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-95"
                                 x-on:click.away="isActive = false"
                                 x-on:keydown.escape.window="isActive = false"
-                            >
-                                <div class="p-2">
-                                    <a
-                                        href="{{ route('profile') }}"
-                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                <!-- Active: "bg-gray-100", Not Active: "" -->
+                                <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1"
+                                   id="user-menu-item-0">Profile</a>
+
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button
+                                        type="submit"
+                                        class="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-red-100"
                                         role="menuitem"
                                     >
-                                        Profile
-                                    </a>
-
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button
-                                            type="submit"
-                                            class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
-                                            role="menuitem"
-                                        >
-                                            Logout
-                                        </button>
-                                    </form>
-                                </div>
+                                        Logout
+                                    </button>
+                                </form>
                             </div>
                         </div>
 
