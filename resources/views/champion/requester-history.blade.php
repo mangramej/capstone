@@ -51,7 +51,7 @@
 
                                     <div class="col-span-1">
                                     <span class="font-semibold block">
-                                        {{ $request->no_of_bags }} Milk bags
+                                        {{ $request->quantity }} Milk bags
                                     </span>
 
                                         <span class="block text-xs sm:text-sm text-gray-500">
