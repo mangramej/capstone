@@ -13,6 +13,7 @@ class MilkRequest extends Component
     public $status = 'all';
 
     public $from = null;
+
     public $to = null;
 
     public $dataIncluded = [
@@ -23,7 +24,7 @@ class MilkRequest extends Component
         'address',
         'phone_number',
         'baby_name',
-        'provided_by'
+        'provided_by',
     ];
 
     protected $messages = [
@@ -55,7 +56,7 @@ class MilkRequest extends Component
                 'statuses'
             )
             ->when(
-                $this->status !== 'all', fn($q) => $q->where('status', $this->status)
+                $this->status !== 'all', fn ($q) => $q->where('status', $this->status)
             )
             ->when(! is_null($this->from), function ($q) {
                 $q->whereDate('created_at', '>=', $this->from);
@@ -69,7 +70,7 @@ class MilkRequest extends Component
         if (in_array('provided_by', $this->dataIncluded)) {
             $milkRequests->map(function (MilkRequestModel $request) {
                 $request->provider_name = $request->provider
-                    ? $request->provider->first_name . ' ' . $request->provider->first_name
+                    ? $request->provider->first_name.' '.$request->provider->first_name
                     : 'No Provider';
 
                 return $request;
@@ -92,7 +93,7 @@ class MilkRequest extends Component
                 return $el;
             });
 
-        return response()->streamDownload(function () use ($data){
+        return response()->streamDownload(function () use ($data) {
             return (new FastExcel($data->all()))
                 ->export('php://output');
         }, sprintf('milk-requests-%s.xlsx', date('Y-m-d')));

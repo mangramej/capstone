@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Champion;
 
 use App\Models\Requester\MilkRequest;
 use App\Modules\Enums\MilkRequestStatus;
+use App\Modules\Services\MilkRequestService;
 use App\Modules\Traits\WithAlert;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -35,13 +36,11 @@ class AcceptDeclineMilkRequest extends Component
             return;
         }
 
-        $this->milkRequest->status = MilkRequestStatus::Accepted;
-        $this->milkRequest->accepted_by = Auth::id();
-        $this->milkRequest->save();
-
-        $this->milkRequest->statuses()->update([
-            'accepted_at' => now(),
-        ]);
+        MilkRequestService::for($this->milkRequest)
+            ->accept(Auth::user())
+            ->notifyRequester(
+                message: 'Your milk request has been accepted.'
+            );
 
         $this->alert(
             type: 'success',

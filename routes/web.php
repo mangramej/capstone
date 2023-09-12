@@ -127,7 +127,7 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
             Route::view('/reports/milk-requests', 'champion.reports.milk-request')
                 ->name('reports.milk-requests');
 
-//            Route::view('/reports/milk-bag-transactions', 'champion.reports')
-//                ->name('reports.milk-bag-transactions');
+            //            Route::view('/reports/milk-bag-transactions', 'champion.reports')
+            //                ->name('reports.milk-bag-transactions');
         });
 });

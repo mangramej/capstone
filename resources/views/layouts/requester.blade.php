@@ -41,6 +41,8 @@
                             <x-icon name="chat" class="h-5 w-5"/>
                         </a>
 
+                        <livewire:show-notification />
+
                         <div x-data="{ isActive: false }" class="relative w-full">
                             <button
                                 x-on:click="isActive = !isActive"

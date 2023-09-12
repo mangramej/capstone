@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use AddressSeeder;
-use App\Models\User;
-use App\Modules\Enums\UserEnum;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AddressSeeder::class,
             AdminSeeder::class,
-//            ProviderSeeder::class,
+            //            ProviderSeeder::class,
         ]);
     }
 }
