@@ -14,6 +14,8 @@ class RecentRequests extends Component
 
     public $readyToLoad = false;
 
+    public $status;
+
     protected $listeners = [
         'NewMilkRequestEvent' => '$refresh',
     ];
@@ -23,13 +25,28 @@ class RecentRequests extends Component
         $this->readyToLoad = true;
     }
 
+    public function updatingStatus()
+    {
+        $this->resetPage();
+    }
+
     public function render(): View
     {
         return view('livewire.requester.recent-requests', [
             'milk_requests' => $this->readyToLoad
                 ? MilkRequest::query()
                     ->where('requester_id', Auth::id())
-                    ->get()
+                    ->when(true, function ($query) {
+                        if (
+                            ! in_array($this->status, ['all', 'pending', 'accepted', 'assigned', 'delivered', 'confirmed'])
+                            || $this->status === 'all'
+                        ) {
+                            return;
+                        }
+
+                        $query->where('status', $this->status);
+                    })
+                    ->latest()
                     ->paginate()
                 : collect()->paginate(),
         ]);

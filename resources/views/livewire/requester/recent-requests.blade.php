@@ -4,12 +4,15 @@
     <div class="w-full lg:w-2/3 mt-4">
         <small class="text-gray-500">Filter:</small>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-            <x-select
-                placeholder="Status"
-            >
-                <x-select.option label="All" value="all"/>
-                <x-select.option label="Pending" value="pending"/>
-            </x-select>
+
+            <x-native-select label="Select Status" wire:model="status">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="accepted">Accepted</option>
+                <option value="assigned">Provider Assigned</option>
+                <option value="delivered">Delivered</option>
+                <option value="confirmed">Confirmed</option>
+            </x-native-select>
         </div>
     </div>
 
