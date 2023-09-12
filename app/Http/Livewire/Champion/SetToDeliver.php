@@ -8,7 +8,6 @@ use App\Modules\Services\MilkRequestService;
 use App\Modules\Traits\WithAlert;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SetToDeliver extends Component
