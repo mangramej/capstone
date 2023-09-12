@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
+use App\Http\Controllers\Champion\ShowRequesterRequestHistoryController;
 use App\Http\Controllers\Chat\MessageController;
 use App\Http\Controllers\Chat\ThreadController;
 use App\Http\Controllers\DashboardController;
@@ -126,6 +127,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::view('/reports/milk-requests', 'champion.reports.milk-request')
                 ->name('reports.milk-requests');
+
+            Route::get('/requester-history/{user}', ShowRequesterRequestHistoryController::class)
+                ->name('show-requester-request-history');
 
             //            Route::view('/reports/milk-bag-transactions', 'champion.reports')
             //                ->name('reports.milk-bag-transactions');

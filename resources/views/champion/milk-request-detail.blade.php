@@ -14,6 +14,13 @@
                             <div class="flex justify-end items-center gap-2">
                                 <livewire:champion.update-request-status :milkRequest="$milkRequest" />
 
+                                <x-button.circle
+                                    href="{{ route('champion.show-requester-request-history', ['user' => $milkRequest->requester_id]) }}"
+                                    type="submit"
+                                    icon="menu-alt-2"
+                                    warning
+                                />
+
                                 <div>
                                     <form action="{{ route('threads.create', [$milkRequest->requester]) }}"
                                           method="POST">
