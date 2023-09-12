@@ -3,6 +3,7 @@
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'set_to_confirm_modal')"
         dark label="Set to Confirm"
+        spinner
     />
 
     <x-breeze-modal name="set_to_confirm_modal">

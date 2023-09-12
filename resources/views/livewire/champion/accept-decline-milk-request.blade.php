@@ -1,7 +1,7 @@
 <div>
     <div class="hidden sm:flex sm:items-center sm:gap-2 ">
-        <x-button icon="check" positive label="Accept" wire:click="accept"/>
-        <x-button icon="x" negative label="Decline" wire:click="decline"/>
+        <x-button icon="check" positive label="Accept" wire:click="accept" spinner/>
+        <x-button icon="x" negative label="Decline" wire:click="decline" spinner/>
     </div>
 
     <div class="flex items-center gap-2 sm:hidden">

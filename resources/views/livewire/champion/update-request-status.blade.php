@@ -9,6 +9,7 @@
                 x-data=""
                 x-on:click.prevent="$dispatch('open-modal', 'assign_provider_modal')"
                 primary label="Assign Provider"
+                spinner
             />
 
             <x-breeze-modal name="assign_provider_modal" disableOverflow>
