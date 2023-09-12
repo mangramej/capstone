@@ -4,9 +4,11 @@ namespace App\Http\Livewire\Champion;
 
 use App\Models\Requester\MilkRequest;
 use App\Modules\Enums\MilkRequestStatus;
+use App\Modules\Services\MilkRequestService;
 use App\Modules\Traits\WithAlert;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SetToDeliver extends Component
@@ -30,6 +32,11 @@ class SetToDeliver extends Component
         $this->milkRequest->statuses()->update([
             'delivered_at' => now(),
         ]);
+
+        MilkRequestService::for($this->milkRequest)
+            ->notifyRequester(
+                message: 'Your milk request has been delivered.'
+            );
 
         $this->alert(
             type: 'info',
