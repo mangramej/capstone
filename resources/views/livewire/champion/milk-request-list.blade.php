@@ -1,11 +1,19 @@
 <div class="p-4" wire:init="load">
-    <h1 class="font-medium text-lg">Recent Requests</h1>
+
+    <div class="flex justify-between items-center">
+        <h1 class="font-medium text-lg">Recent Requests</h1>
+        <x-button.circle wire:click="$refresh" primary icon="refresh" spinner/>
+    </div>
+
 
     <div class="w-full lg:w-2/3 mt-4">
         <small class="text-gray-500">Filter:</small>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+            <x-input label="Search" placeholder="Reference Number" wire:model.debounce.250ms="search"/>
+
             <x-select
                 placeholder="Status"
+                label="Select Status"
                 wire:model="status"
                 :clearable="false"
             >
@@ -23,7 +31,7 @@
         @if($readyToLoad)
             <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                 <thead>
-                <tr class="bg-gray-100">
+                <tr class="bg-gray-100 border-t">
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                         Reference Number
                     </th>

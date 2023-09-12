@@ -17,8 +17,10 @@ class MilkRequestList extends Component
 
     public $status = 'pending';
 
+    public $search = '';
+
     protected $queryString = [
-        'status',
+        'status', 'search',
     ];
 
     public function load(): void
@@ -26,11 +28,22 @@ class MilkRequestList extends Component
         $this->readyToLoad = true;
     }
 
+    public function updatingStatus(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
+
     public function render(): View
     {
         return view('livewire.champion.milk-request-list', [
             'milk_requests' => $this->readyToLoad
                 ? MilkRequest::query()
+                    ->where('ref_number', 'LIKE', '%'.$this->search.'%')
                     ->when(true, function ($query) {
                         switch ($this->status) {
                             case MilkRequestStatus::Pending->value:
