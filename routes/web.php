@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
+use App\Http\Controllers\Champion\ShowProviderProfileController;
 use App\Http\Controllers\Champion\ShowRequesterRequestHistoryController;
 use App\Http\Controllers\Chat\MessageController;
 use App\Http\Controllers\Chat\ThreadController;
@@ -19,17 +20,6 @@ use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::view('/', 'welcome')->name('home');
 
@@ -130,6 +120,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::get('/requester-history/{user}', ShowRequesterRequestHistoryController::class)
                 ->name('show-requester-request-history');
+
+            Route::get('/provider/{user}/profile', ShowProviderProfileController::class)
+                ->name('show-provider-profile');
 
             //            Route::view('/reports/milk-bag-transactions', 'champion.reports')
             //                ->name('reports.milk-bag-transactions');

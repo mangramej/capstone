@@ -23,7 +23,7 @@
                             Full Name
                         </th>
                         <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                            Date
+                            Date Added
                         </th>
                         <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                             Status
@@ -37,7 +37,11 @@
                 @forelse($providers as $p)
                     <tr>
                         <td class="whitespace-nowrap p-4 font-medium text-gray-900">
-                            {{ $p->provider->fullname() }}
+                            <a href="{{ route('champion.show-provider-profile', [$p->provider]) }}"
+                                class="hover:text-sky-500 underline transition ease"
+                            >
+                                {{ $p->provider->fullname() }}
+                            </a>
                         </td>
                         <td class="whitespace-nowrap p-4 text-gray-600">
                             {{ $p->created_at->format('m/d/Y') }}

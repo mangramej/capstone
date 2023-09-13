@@ -19,7 +19,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 bg-gray-100">Total Bags Provided</td>
+                                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 bg-gray-100">Total Bags Available</td>
                                         <td colspan="2" class="w-full whitespace-nowrap px-4 py-2 text-gray-700 font-medium">{{ $milk_bag->total_milk_bags }}</td>
                                     </tr>
 

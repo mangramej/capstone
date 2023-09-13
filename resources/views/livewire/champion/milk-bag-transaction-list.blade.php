@@ -23,7 +23,7 @@
                         Provider Name
                     </th>
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                        Total Provided
+                        Available Bags
                     </th>
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                     </th>
