@@ -115,16 +115,16 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
             Route::get('/download/milk-request/{milkRequest}', MilkRequestReceiptController::class)
                 ->name('milk-request.download');
 
-            Route::view('/reports/milk-requests', 'champion.reports.milk-request')
-                ->name('reports.milk-requests');
-
             Route::get('/requester-history/{user}', ShowRequesterRequestHistoryController::class)
                 ->name('show-requester-request-history');
 
             Route::get('/provider/{user}/profile', ShowProviderProfileController::class)
                 ->name('show-provider-profile');
 
-            //            Route::view('/reports/milk-bag-transactions', 'champion.reports')
-            //                ->name('reports.milk-bag-transactions');
+            Route::view('/reports/milk-requests', 'champion.reports.milk-request')
+                ->name('reports.milk-requests');
+
+            Route::view('/reports/milk-bag-transactions', 'champion.reports.milk-bag-transactions')
+                ->name('reports.milk-bag-transactions');
         });
 });
