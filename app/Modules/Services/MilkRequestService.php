@@ -26,9 +26,27 @@ class MilkRequestService
 
         $this->milkRequest->save();
 
+        $accepted_at = now();
+
         $this->milkRequest->statuses()->update([
-            'accepted_at' => now(),
+            'accepted_at' => $accepted_at,
         ]);
+
+        activity('Accepted Milk Request')
+            ->performedOn($this->milkRequest)
+            ->causedBy($champion)
+            ->event('accepted')
+            ->withProperties([
+                'attributes' => [
+                    'status' => $this->milkRequest->status->value,
+                    'accepted_at' => $accepted_at->format('m/d/Y, h:iA'),
+                ],
+                'old' => [
+                    'status' => MilkRequestStatus::Pending->value,
+                    'accepted_at' => '',
+                ],
+            ])
+            ->log('Accepted the Milk Request ('.$this->milkRequest->ref_number.')');
 
         return $this;
     }

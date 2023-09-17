@@ -8,6 +8,7 @@ use App\Modules\Services\MilkRequestService;
 use App\Modules\Traits\WithAlert;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SetToDeliver extends Component
@@ -28,14 +29,32 @@ class SetToDeliver extends Component
         $this->milkRequest->status = MilkRequestStatus::Delivered;
         $this->milkRequest->save();
 
+        $delivered_at = now();
+
         $this->milkRequest->statuses()->update([
-            'delivered_at' => now(),
+            'delivered_at' => $delivered_at,
         ]);
 
         MilkRequestService::for($this->milkRequest)
             ->notifyRequester(
                 message: 'Your milk request has been delivered.'
             );
+
+        activity('Delivered Milk Request')
+            ->performedOn($this->milkRequest)
+            ->causedBy(Auth::user())
+            ->event('delivered')
+            ->withProperties([
+                'attributes' => [
+                    'status' => $this->milkRequest->status->value,
+                    'delivered_at' => $delivered_at->format('m/d/Y, h:iA'),
+                ],
+                'old' => [
+                    'status' => MilkRequestStatus::Assigned->value,
+                    'delivered_at' => '',
+                ],
+            ])
+            ->log('Delivered the Milk Request ('.$this->milkRequest->ref_number.')');
 
         $this->alert(
             type: 'info',

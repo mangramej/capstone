@@ -7,6 +7,7 @@ use App\Modules\Enums\MilkRequestStatus;
 use App\Modules\Traits\WithAlert;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SetToConfirmed extends Component
@@ -27,9 +28,27 @@ class SetToConfirmed extends Component
         $this->milkRequest->status = MilkRequestStatus::Confirmed;
         $this->milkRequest->save();
 
+        $confirmed_at = now();
+
         $this->milkRequest->statuses()->update([
-            'confirmed_at' => now(),
+            'confirmed_at' => $confirmed_at,
         ]);
+
+        activity('Confirmed Milk Request')
+            ->performedOn($this->milkRequest)
+            ->causedBy(Auth::user())
+            ->event('confirmed')
+            ->withProperties([
+                'attributes' => [
+                    'status' => $this->milkRequest->status->value,
+                    'confirmed_at' => $confirmed_at->format('m/d/Y, h:iA'),
+                ],
+                'old' => [
+                    'status' => MilkRequestStatus::Delivered->value,
+                    'confirmed_at' => '',
+                ],
+            ])
+            ->log('Confirmed the Milk Request ('.$this->milkRequest->ref_number.')');
 
         $this->alert(
             type: 'info',

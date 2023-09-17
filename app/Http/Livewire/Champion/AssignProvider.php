@@ -46,15 +46,37 @@ class AssignProvider extends Component
         try {
             DB::beginTransaction();
 
+            $provider = User::find($this->selectedProvider);
+
             ChampionRepository::for(Auth::user())
-                ->deductMilkBag($this->milkRequest, User::find($this->selectedProvider));
+                ->deductMilkBag($this->milkRequest, $provider);
 
             $this->milkRequest->status = MilkRequestStatus::Assigned;
             $this->milkRequest->save();
 
+            $assigned_at = now();
+
             $this->milkRequest->statuses()->update([
-                'assigned_at' => now(),
+                'assigned_at' => $assigned_at,
             ]);
+
+            activity('Assigned Provider Milk Request')
+                ->performedOn($this->milkRequest)
+                ->causedBy(Auth::user())
+                ->event('assigned')
+                ->withProperties([
+                    'attributes' => [
+                        'status' => $this->milkRequest->status->value,
+                        'assigned_at' => $assigned_at->format('m/d/Y, H:iA'),
+                        'provided_by' => $provider->fullname(),
+                    ],
+                    'old' => [
+                        'status' => MilkRequestStatus::Accepted->value,
+                        'assigned_at' => '',
+                        'provided_by' => '',
+                    ],
+                ])
+                ->log('Assigned a Provider to the Milk Request ('.$this->milkRequest->ref_number.')');
 
             DB::commit();
 

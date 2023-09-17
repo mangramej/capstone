@@ -59,18 +59,29 @@ class SendMilkRequest extends Component
             return;
         }
 
+        $user = Auth::user();
+
         $validated = $this->validate();
 
-        $filename = $this->image->store('/user-'.Auth::id(), 'attachments');
+        $filename = $this->image->store('/user-'.$user->id, 'attachments');
 
         $milkRequest = MilkRequest::create(array_merge(
             $validated,
             [
                 'image' => basename($filename),
-                'requester_id' => Auth::id(),
-                'address' => Auth::user()->address(),
+                'requester_id' => $user->id,
+                'address' => $user->address(),
             ]
         ));
+
+        activity('Created Milk Request')
+            ->performedOn($milkRequest)
+            ->causedBy($user)
+            ->event('created')
+            ->withProperties([
+                'attributes' => $milkRequest->attributesToArray(),
+            ])
+            ->log('Sent a Milk Request');
 
         $this->notification()->success(
             title: __('requester.sent.title'),

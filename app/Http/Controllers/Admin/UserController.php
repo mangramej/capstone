@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Spatie\Activitylog\Models\Activity;
 
 class UserController extends Controller
 {
@@ -34,7 +35,11 @@ class UserController extends Controller
         //            ->latest()
         //            ->paginate();
 
-        return view('admin.user.show', compact('user'));
+        $activities = Activity::causedBy($user)
+            ->latest()
+            ->paginate();
+
+        return view('admin.user.show', compact('user', 'activities'));
     }
 
     //    public function edit($id)
