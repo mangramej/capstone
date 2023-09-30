@@ -28,17 +28,25 @@
 
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-bz.nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Login') }}
-                        </x-bz.nav-link>
-                    </div>
+                    @auth
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-bz.nav-link href="{{ auth()->user()->type === \App\Modules\Enums\UserEnum::Admin ? route('admin.dashboard') : route('dashboard') }}" :active="true">
+                                {{ __('Dashboard') }}
+                            </x-bz.nav-link>
+                        </div>
+                    @else
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-bz.nav-link :href="route('login')" :active="request()->routeIs('login')">
+                                {{ __('Login') }}
+                            </x-bz.nav-link>
+                        </div>
 
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-bz.nav-link :href="route('register')" :active="request()->routeIs('register')">
-                            {{ __('Register') }}
-                        </x-bz.nav-link>
-                    </div>
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-bz.nav-link :href="route('register')" :active="request()->routeIs('register')">
+                                {{ __('Register') }}
+                            </x-bz.nav-link>
+                        </div>
+                    @endauth
                 </div>
 
                 <!-- Hamburger -->
@@ -61,13 +69,19 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-bz.responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    {{ __('Login') }}
-                </x-bz.responsive-nav-link>
+                @auth
+                    <x-bz.responsive-nav-link href="{{ auth()->user()->type === \App\Modules\Enums\UserEnum::Admin ? route('admin.dashboard') : route('dashboard') }}" :active="true">
+                        {{ __('Login') }}
+                    </x-bz.responsive-nav-link>
+                @else
+                    <x-bz.responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Login') }}
+                    </x-bz.responsive-nav-link>
 
-                <x-bz.responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                    {{ __('Register') }}
-                </x-bz.responsive-nav-link>
+                    <x-bz.responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        {{ __('Register') }}
+                    </x-bz.responsive-nav-link>
+                @endauth
             </div>
         </div>
     </nav>
