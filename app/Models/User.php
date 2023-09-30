@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Modules\Castables\PersonalInfo;
 use App\Modules\Enums\UserEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Yajra\Address\Entities\Barangay;
 use Yajra\Address\HasAddress;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasAddress, HasRoles;
 
