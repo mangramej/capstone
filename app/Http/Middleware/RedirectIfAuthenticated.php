@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Modules\Enums\UserEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(route('home'));
+                if (Auth::user()->type === UserEnum::Admin) {
+                    return redirect(route('admin.dashboard'));
+                }
+
+                return redirect(route('dashboard'));
             }
         }
 

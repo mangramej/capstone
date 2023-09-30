@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Modules\Enums\UserEnum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,8 +29,10 @@ class LoginTest extends TestCase
 
         $this->be($user);
 
+        $route_redirected = $user->type === UserEnum::Admin ? 'admin.dashboard' : 'dashboard';
+
         $this->get(route('login'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route($route_redirected));
     }
 
     /** @test */

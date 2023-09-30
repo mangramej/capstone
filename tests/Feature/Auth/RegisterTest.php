@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Modules\Enums\UserEnum;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +30,10 @@ class RegisterTest extends TestCase
 
         $this->be($user);
 
+        $route_redirected = $user->type === UserEnum::Admin ? 'admin.dashboard' : 'dashboard';
+
         $this->get(route('register'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route($route_redirected));
     }
 
     /** @test */
