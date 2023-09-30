@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Auth\Passwords;
 
+use App\Modules\Enums\UserEnum;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Confirm extends Component
@@ -17,7 +19,15 @@ class Confirm extends Component
 
         session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(route('home'));
+        if (! Auth::check()) {
+            return redirect()->intended(route('home'));
+        }
+
+        if (Auth::user()->type === UserEnum::Admin) {
+            return redirect()->intended(route('admin.dashboard'));
+        }
+
+        return redirect()->intended(route('dashboard'));
     }
 
     public function render()
