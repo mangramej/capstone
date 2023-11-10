@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Champion;
 use App\Models\Requester\MilkRequest;
 use App\Modules\Enums\MilkRequestStatus;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,7 +14,7 @@ class MilkRequestList extends Component
 
     public $readyToLoad = false;
 
-    public $status = 'pending';
+    public $status = 'all';
 
     public $search = '';
 
@@ -46,26 +45,28 @@ class MilkRequestList extends Component
                     ->where('ref_number', 'LIKE', '%'.$this->search.'%')
                     ->when(true, function ($query) {
                         switch ($this->status) {
-                            case MilkRequestStatus::Pending->value:
-                                $query->where('status', $this->status);
-                                $query->whereNull('accepted_by');
-                                $query->whereDoesntHave('declines', function ($q) {
-                                    $q->where('declined_by', Auth::id());
-                                });
-                                break;
+                            //                            case MilkRequestStatus::Pending->value:
+                            //                                $query->where('status', $this->status);
+                            //                                $query->whereNull('accepted_by');
+                            //                                break;
 
-                            case 'declined':
-                                $query->whereHas('declines', function ($q) {
-                                    $q->where('declined_by', Auth::id());
+                            case 'all':
+                                $query->where(function ($query) {
+                                    $query->orWhereNotNull('accepted_by');
+                                    $query->orWhereHas('declines');
                                 });
+
+                                return;
+
+                            case MilkRequestStatus::Declined->value:
+                                $query->whereHas('declines');
                                 break;
 
                             default:
                                 $query->where('status', $this->status);
-                                $query->where('accepted_by', Auth::id());
                         }
                     })
-                    ->get()
+                    ->latest()
                     ->paginate()
                     ->withQueryString()
                 : collect()->paginate(),

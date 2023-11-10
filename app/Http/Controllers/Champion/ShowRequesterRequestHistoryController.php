@@ -17,14 +17,14 @@ class ShowRequesterRequestHistoryController extends Controller
         $milkRequests = MilkRequest::query()
             ->select(['id', 'ref_number', 'accepted_by', 'quantity', 'status', 'created_at', 'requester_id'])
             ->where('requester_id', $user->id)
-            ->where('accepted_by', Auth::id())
+//            ->where('accepted_by', Auth::id())
             ->latest()
             ->paginate();
 
         $requestCount = MilkRequest::query()
             ->select(['id', 'accepted_by', 'requester_id'])
             ->where('requester_id', $user->id)
-            ->where('accepted_by', Auth::id())
+//            ->where('accepted_by', Auth::id())
             ->count();
 
         return view('champion.requester-history', compact('user', 'milkRequests', 'requestCount'));

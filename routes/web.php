@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
+use App\Http\Controllers\Champion\ShowMilkRequestController;
 use App\Http\Controllers\Champion\ShowProviderProfileController;
 use App\Http\Controllers\Champion\ShowRequesterRequestHistoryController;
 use App\Http\Controllers\Chat\MessageController;
@@ -59,6 +60,7 @@ Route::view('/complete-registration', 'private.complete-registration')
     ->middleware(['auth', 'partial'])
     ->name('complete-registration');
 
+// ADMIN ROUTES
 Route::middleware(['auth', 'verified', 'type:admin'])
     ->name('admin.')
     ->group(function () {
@@ -97,6 +99,7 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
                 ->name('milk-request-detail');
         });
 
+    // CHAMPION ROUTES
     Route::middleware('type:champion')
         ->name('champion.')
         ->group(function () {
@@ -126,5 +129,11 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::view('/reports/milk-bag-transactions', 'champion.reports.milk-bag-transactions')
                 ->name('reports.milk-bag-transactions');
+
+            Route::get('/milk-requests/pending', [ShowMilkRequestController::class, 'pending'])
+                ->name('show-milk-requests.pending');
+
+            Route::get('/milk-requests/recent', [ShowMilkRequestController::class, 'recent'])
+                ->name('show-milk-requests.recent');
         });
 });

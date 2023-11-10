@@ -21,6 +21,24 @@
             </div>
         </li>
 
+        @if($milkRequest->declines)
+            <li>
+                <div class="flex-start flex items-center pt-1">
+                    <div
+                        class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-gray-300 dark:bg-gray-500"></div>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                        {{ $milkRequest->declines->created_at->format('j.n.Y, g A') }}
+                    </p>
+                </div>
+                <div class="mb-6 ml-4 mt-2">
+                    <h4 class="mb-1.5 font-semibold text-gray-800">Declined</h4>
+                    <p class="mb-3 text-gray-600 text-xs">
+                        The request has been declined by champion.
+                    </p>
+                </div>
+            </li>
+        @endif
+
         @if($status->accepted_at)
             <li>
                 <div class="flex-start flex items-center pt-1">

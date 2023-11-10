@@ -13,21 +13,23 @@ class MilkRequestPolicy
      */
     public function view(User $user, MilkRequest $milkRequest): bool
     {
+        // Allow if requester own the request
         if ($user->type === UserEnum::Requester) {
             return $milkRequest->requester_id === $user->id;
         }
 
         if ($user->type === UserEnum::Champion) {
-            $isDecline = $milkRequest->whereHas('declines', function ($query) use ($user, $milkRequest) {
-                $query->where('milk_request_id', $milkRequest->id);
-                $query->where('declined_by', $user->id);
-            })->exists();
+            //            $isDecline = $milkRequest->whereHas('declines', function ($query) use ($user, $milkRequest) {
+            //                $query->where('milk_request_id', $milkRequest->id);
+            //                $query->where('declined_by', $user->id);
+            //            })->exists();
+            //
+            //            if (is_null($milkRequest->accepted_by) && ! $isDecline) {
+            //                return true;
+            //            }
 
-            if (is_null($milkRequest->accepted_by) && ! $isDecline) {
-                return true;
-            }
-
-            return $milkRequest->accepted_by === $user->id;
+            //            return $milkRequest->accepted_by === $user->id;
+            return true;
         }
 
         return false;

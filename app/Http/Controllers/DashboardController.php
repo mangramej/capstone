@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Champion\ChampionProvider;
+use App\Models\DeclinedRequest;
 use App\Models\Requester\MilkRequest;
 use App\Models\User;
 use App\Modules\Enums\MilkRequestStatus;
@@ -26,32 +27,28 @@ class DashboardController extends Controller
     private function champion(): View
     {
         $total_milk_bags = ChampionProvider::query()
-            ->where('champion_id', Auth::id())
+//            ->where('champion_id', Auth::id())
             ->sum('total_milk_bags');
 
-        $total_milk_requests = MilkRequest::query()
-            ->where('accepted_by', Auth::id())
-            ->count();
+        $total_milk_requests = MilkRequest::count();
 
         $total_accepted_milk_request = MilkRequest::query()
-            ->where('accepted_by', Auth::id())
-            ->where('status', MilkRequestStatus::Accepted)
+            ->whereNotNull('accepted_by')
             ->count();
 
         $total_assigned_milk_request = MilkRequest::query()
-            ->where('accepted_by', Auth::id())
             ->where('status', MilkRequestStatus::Assigned)
             ->count();
 
         $total_delivered_milk_request = MilkRequest::query()
-            ->where('accepted_by', Auth::id())
             ->where('status', MilkRequestStatus::Delivered)
             ->count();
 
         $total_confirmed_milk_request = MilkRequest::query()
-            ->where('accepted_by', Auth::id())
             ->where('status', MilkRequestStatus::Confirmed)
             ->count();
+
+        $total_declined_milk_request = DeclinedRequest::count();
 
         $total_provider = ChampionProvider::where('champion_id', Auth::id())
             ->count();
@@ -64,6 +61,7 @@ class DashboardController extends Controller
             'total_delivered_milk_request',
             'total_confirmed_milk_request',
             'total_provider',
+            'total_declined_milk_request',
         ]));
     }
 

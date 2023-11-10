@@ -1,3 +1,4 @@
+@php use App\Modules\Enums\MilkRequestStatus; @endphp
 <div class="p-4" wire:init="load">
 
     <div class="flex justify-between items-center">
@@ -17,11 +18,12 @@
                 wire:model="status"
                 :clearable="false"
             >
-                <x-select.option label="Pending" value="{{ \App\Modules\Enums\MilkRequestStatus::Pending }}"/>
-                <x-select.option label="Accepted" value="{{ \App\Modules\Enums\MilkRequestStatus::Accepted }}"/>
-                <x-select.option label="Assigned" value="{{ \App\Modules\Enums\MilkRequestStatus::Assigned }}"/>
-                <x-select.option label="Delivered" value="{{ \App\Modules\Enums\MilkRequestStatus::Delivered }}"/>
-                <x-select.option label="Confirmed" value="{{ \App\Modules\Enums\MilkRequestStatus::Confirmed }}"/>
+                <x-select.option label="All" value="all"/>
+                <x-select.option label="Accepted" value="{{ MilkRequestStatus::Accepted }}"/>
+                <x-select.option label="Declined" value="{{ MilkRequestStatus::Declined }}"/>
+                <x-select.option label="Assigned" value="{{ MilkRequestStatus::Assigned }}"/>
+                <x-select.option label="Delivered" value="{{ MilkRequestStatus::Delivered }}"/>
+                <x-select.option label="Confirmed" value="{{ MilkRequestStatus::Confirmed }}"/>
                 <x-select.option label="Declined" value="declined"/>
             </x-select>
         </div>
@@ -41,14 +43,12 @@
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                         Bags
                     </th>
-                    @if($status !== 'declined')
-                        <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                            Status
-                        </th>
-                        <th class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                            Action
-                        </th>
-                    @endif
+                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
+                        Status
+                    </th>
+                    <th class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
+                        Action
+                    </th>
 
                 </tr>
                 </thead>
@@ -65,15 +65,13 @@
                         <td class="whitespace-nowrap p-4 text-gray-700 font-bold">
                             {{ $request->quantity }}
                         </td>
-                        @if($status !== 'declined')
-                            <td class="whitespace-nowrap p-4 text-gray-700">
-                                <x-status-badge :status="$request->status"/>
-                            </td>
-                            <td class="whitespace-nowrap text-end px-4 text-gray-700">
-                                <x-button xs primary href="{{ route('champion.milk-request-detail', [$request]) }}"
-                                          label="View More"/>
-                            </td>
-                        @endif
+                        <td class="whitespace-nowrap p-4 text-gray-700">
+                            <x-status-badge :status="$request->status"/>
+                        </td>
+                        <td class="whitespace-nowrap text-end px-4 text-gray-700">
+                            <x-button xs primary href="{{ route('champion.milk-request-detail', [$request]) }}"
+                                      label="View More"/>
+                        </td>
                     </tr>
                 @empty
                     <tr>

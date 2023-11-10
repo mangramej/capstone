@@ -24,13 +24,13 @@ class AcceptDeclineMilkRequest extends Component
     public function accept()
     {
         if (
-            $this->milkRequest->status === MilkRequestStatus::Accepted
-            || $this->milkRequest->accepted_by === Auth::id()
+            $this->milkRequest->status !== MilkRequestStatus::Pending ||
+            ! is_null($this->milkRequest->accepted_by)
         ) {
             $this->alert(
-                type: 'info',
-                title: 'Milk Request',
-                description: 'The request has already been set to accepted.'
+                type: 'warning',
+                title: 'Milk Request Accept',
+                description: 'The request has already been accepted by other champion.',
             );
 
             return;
@@ -44,7 +44,7 @@ class AcceptDeclineMilkRequest extends Component
 
         $this->alert(
             type: 'success',
-            title: 'Milk Request Update',
+            title: 'Milk Request Accept',
             description: 'The request has been set to accepted.',
             event: 'UpdateMilkRequestEvent'
         );
@@ -52,31 +52,35 @@ class AcceptDeclineMilkRequest extends Component
 
     public function decline()
     {
-        $isDecline = $this->milkRequest->whereHas('declines', function ($query) {
+        $isDeclineAlready = $this->milkRequest->whereHas('declines', function ($query) {
             $query->where('milk_request_id', $this->milkRequest->id);
-            $query->where('declined_by', Auth::id());
         })->exists();
 
-        if (! $isDecline) {
-            $this->milkRequest->declines()->create([
-                'declined_by' => Auth::id(),
-            ]);
+        $isAcceptedByOther = ! is_null($this->milkRequest->accepted_by);
 
+        if ($isDeclineAlready || $isAcceptedByOther) {
             $this->alert(
-                type: 'info',
-                title: 'Milk Request Updated',
-                description: 'The request has been set to decline.'
+                type: 'warning',
+                title: 'Milk Request Decline',
+                description: 'The request is already been accepted or declined by other champion.',
             );
 
-        } else {
-            $this->alert(
-                type: 'info',
-                title: 'Milk Request',
-                description: 'The request has already been set to decline.'
-            );
+            return;
         }
 
-        return redirect()->route('dashboard');
+        $this->milkRequest->declines()->create([
+            'declined_by' => Auth::id(),
+        ]);
+
+        $this->milkRequest->status = MilkRequestStatus::Declined;
+        $this->milkRequest->save();
+
+        $this->alert(
+            type: 'success',
+            title: 'Milk Request Decline',
+            description: 'The request has been set to decline.',
+            event: 'UpdateMilkRequestEvent'
+        );
     }
 
     public function render(): View

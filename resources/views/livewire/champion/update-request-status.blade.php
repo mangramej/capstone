@@ -24,7 +24,7 @@
         @endif
     </div>
 
-    @if($milkRequest->accepted_by === auth()->id())
+    @if(! is_null($milkRequest->accepted_by))
         <div>
             <x-button.circle
                 icon="document-download"

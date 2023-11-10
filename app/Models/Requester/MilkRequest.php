@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Modules\Enums\MilkRequestStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MilkRequest extends Model
@@ -54,9 +53,9 @@ class MilkRequest extends Model
         //        return Storage::disk('attachments')->url("/user-$this->id/$this->image");
     }
 
-    public function declines(): HasMany
+    public function declines(): HasOne
     {
-        return $this->hasMany(DeclinedRequest::class);
+        return $this->hasOne(DeclinedRequest::class);
     }
 
     public function statuses(): HasOne

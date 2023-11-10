@@ -15,13 +15,20 @@ class RequestStatusActivity extends Component
         'UpdateMilkRequestEvent' => '$refresh',
     ];
 
+    public bool $isDeclined;
+
+    public MilkRequest $milkRequest;
+
     public function mount(MilkRequest $milkRequest): void
     {
         $this->status = $milkRequest->statuses;
+        $this->milkRequest = $milkRequest;
     }
 
     public function render(): View
     {
+        $this->milkRequest->load('declines');
+
         return view('livewire.champion.request-status-activity');
     }
 }

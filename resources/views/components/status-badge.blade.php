@@ -25,6 +25,10 @@
         <x-badge rounded secondary label="Confirmed" />
         @break
 
+    @case(MilkRequestStatus::Declined)
+        <x-badge rounded negative label="Declined" />
+        @break
+
     @default
         <x-badge rounded label="No Status" />
         @break
