@@ -15,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Yajra\Address\Entities\Barangay;
 use Yajra\Address\HasAddress;
 
-class User extends Authenticatable //implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasAddress, HasRoles;
 
