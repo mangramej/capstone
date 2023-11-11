@@ -12,15 +12,6 @@
                 </div>
 
                 <div class="col-span-3 sm:col-span-2">
-                    <x-input wire:model.defer="baby_name" label="Baby Name *" placeholder="the baby name"/>
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <x-input wire:model.defer="phone_number" label="Phone Number *" placeholder="your phone number" />
-                </div>
-
-                {{-- Valid ID --}}
-                <div class="col-span-3 sm:col-span-2">
                     <span class="text-start text-sm w-full font-medium text-gray-700 dark:text-gray-400">
                         Upload ID *
                     </span>
@@ -38,8 +29,14 @@
                     </span>
                 </div>
 
+
+                <div class="col-span-3 sm:col-span-1">
+                    <x-input wire:model.defer="phone_number" label="Phone Number *" placeholder="your phone number" />
+                </div>
+
+
                 {{-- Address --}}
-                <div class="flex flex-col justify-start items-center col-span-3 sm:col-span-1">
+                <div class="flex flex-col justify-start items-center col-span-3 sm:col-span-2">
                     <span class="text-start w-full text-sm font-medium text-gray-700 dark:text-gray-400">Current Address *</span>
 
                     <input type="radio" class="hidden peer" id="current_address" checked>
@@ -64,7 +61,10 @@
                 </div>
 
                 <div class="col-span-3">
-                    <x-toggle wire:model.defer="agreed" label="Accept the terms and conditions"/>
+                   <div class="flex items-center space-x-2">
+                       <x-toggle wire:model.defer="agreed"/>
+                       <span class="text-sm text-gray-600">I agree to the <a href="#" class="text-sky-600">terms and agreements</a></span>
+                   </div>
                 </div>
             </div>
         </div>

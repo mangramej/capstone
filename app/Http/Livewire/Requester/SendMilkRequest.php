@@ -30,7 +30,7 @@ class SendMilkRequest extends Component
     protected $rules = [
         'mother_name' => ['required', 'string', 'max:255'],
         'quantity' => ['required', 'numeric'],
-        'baby_name' => ['required', 'string', 'max:255'],
+        //        'baby_name' => ['required', 'string', 'max:255'],
         'phone_number' => ['required', 'max:255'],
         'comment' => ['nullable', 'string', 'max:255'],
         'image' => ['required', 'image', 'max:12000'],

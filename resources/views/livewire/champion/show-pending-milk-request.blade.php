@@ -55,10 +55,10 @@
                                 <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->mother_name }}</dd>
                             </div>
 
-                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                                <dt class="font-medium text-gray-900">Baby Name</dt>
-                                <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->baby_name }}</dd>
-                            </div>
+{{--                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">--}}
+{{--                                <dt class="font-medium text-gray-900">Baby Name</dt>--}}
+{{--                                <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->baby_name }}</dd>--}}
+{{--                            </div>--}}
 
                             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                                 <dt class="font-medium text-gray-900">No of Bags</dt>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'accepted_by')->nullable();
             $table->foreignIdFor(User::class, 'provided_by')->nullable();
             $table->string('mother_name');
-            $table->string('baby_name');
+            $table->string('baby_name')->nullable();
             $table->integer('quantity');
             $table->longText('address');
             $table->string('phone_number');

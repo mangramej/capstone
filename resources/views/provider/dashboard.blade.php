@@ -14,7 +14,7 @@
 
         <div class="w-full sm:w-fit">
             <h1 class="text-end text-2xl font-bold text-gray-900 sm:text-3xl">
-                {{ $milk_bags->total_milk_bags }}
+                {{ $milk_bags->total_milk_bags ?? 0 }}
             </h1>
 
             <p class="text-end mt-1.5 text-sm text-gray-500">

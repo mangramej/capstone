@@ -9,6 +9,7 @@ use App\Modules\Enums\MilkRequestStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class MilkRequest extends Model
 {
@@ -66,11 +67,12 @@ class MilkRequest extends Model
     protected static function booted(): void
     {
         static::created(function (MilkRequest $milkRequest) {
-            $prefix = strtoupper($milkRequest->mother_name[0].$milkRequest->baby_name[0]);
-            $date = $milkRequest->created_at->format('mdy');
-            $id = $milkRequest->id;
+            //            $prefix = strtoupper($milkRequest->mother_name[0]);
+            //            $prefix = Str::random(6);
+            //            $date = $milkRequest->created_at->format('mdy');
+            //            $id = $milkRequest->id;
 
-            $milkRequest->ref_number = $prefix.$date.$id;
+            $milkRequest->ref_number = strtoupper(Str::random(9));
 
             $milkRequest->save();
 
