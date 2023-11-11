@@ -25,8 +25,12 @@ class PersonalInfoStepComponent extends StepComponent
         'first_name' => ['required', 'string', 'min:2', 'max:255'],
         'middle_name' => ['nullable', 'string', 'max:255'],
         'last_name' => ['required', 'string', 'min:2', 'max:255'],
-        'date_of_birth' => ['required', 'date'],
+        'date_of_birth' => 'required|date|before:-16 years',
         'phone_number' => ['required', 'string', 'max:255'],
+    ];
+
+    protected $messages = [
+        'date_of_birth.before' => 'Must 16+ years older',
     ];
 
     public function save(): void

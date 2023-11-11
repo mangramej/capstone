@@ -37,13 +37,13 @@
                         :options="$regions"
                     />
 
-                    <x-select
-                        label="Province *"
-                        option-label="name"
-                        option-value="province_id"
-                        :options="$provinces"
-                        wire:model="selectedProvince"
-                    />
+{{--                    <x-select--}}
+{{--                        label="Province *"--}}
+{{--                        option-label="name"--}}
+{{--                        option-value="province_id"--}}
+{{--                        :options="$provinces"--}}
+{{--                        wire:model="selectedProvince"--}}
+{{--                    />--}}
 
                     <x-select
                         label="City *"
