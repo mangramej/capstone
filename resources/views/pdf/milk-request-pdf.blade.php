@@ -19,7 +19,7 @@
 >
     <tr>
         <td>
-            <h2>BABY PASSPORT</h2>
+            <h2>HUMAN MILK</h2>
         </td>
         <td>
             <p>Date:  <span style="font-weight: bold">{{ $created_at }}</span></p>
@@ -49,7 +49,6 @@
         <td style="width: 50%">
             <p>Reference Number: {{ $ref_number }}</p>
             <p>Mother Name: {{ $mother_name }}</p>
-            <p>Baby Name: {{ $baby_name }}</p>
             <p>Contact Number: {{ $phone_number }}</p>
             <p>Address: {{ implode(', ', $address) }}</p>
         </td>
