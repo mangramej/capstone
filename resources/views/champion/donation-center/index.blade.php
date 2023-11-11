@@ -2,32 +2,6 @@
 
 @section('content')
     <section>
-        {{--        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">--}}
-        {{--            <div class="col-span-3">--}}
-        {{--                <x-button--}}
-        {{--                    x-data=""--}}
-        {{--                    x-on:click.prevent="$dispatch('open-modal', 'add_provider_modal')"--}}
-        {{--                    amber label="Add Provider"--}}
-        {{--                />--}}
-
-        {{--                <x-breeze-modal name="add_provider_modal" disableOverflow>--}}
-        {{--                    <livewire:champion.add-provider-to-list/>--}}
-        {{--                </x-breeze-modal>--}}
-        {{--            </div>--}}
-
-        {{--            <div class="col-span-3 lg:col-span-2">--}}
-        {{--                --}}
-{{--                        <livewire:champion.provider-list/>--}}
-        {{--                --}}
-        {{--            </div>--}}
-
-        {{--            <div class="col-span-3 lg:col-span-1">--}}
-        {{--                --}}
-        {{--                <livewire:champion.provider-list-count/>--}}
-        {{--                --}}
-        {{--            </div>--}}
-        {{--        </div>--}}
-
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <x-card>
@@ -48,8 +22,6 @@
                                 class="group flex items-center justify-between rounded-lg px-4 py-2 text-gray-700 {{ request()->routeIs('champion.show-milk-requests.recent') ? 'bg-gray-100' : 'hover:bg-gray-100' }}"
                             >
                                 <span class="text-sm font-medium"> Approved Donor </span>
-
-
                             </a>
                         </li>
 
@@ -61,14 +33,24 @@
                                 <span class="text-sm font-medium"> Donation Center </span>
                             </a>
                         </li>
+
                     </ul>
 
 
                 </x-card>
             </div>
 
-            <div class="col-span-2">
-                <x-card title="Donor Applications">
+            <div class="col-span-2 space-y-4">
+                <div>
+                    <x-button href="{{ route('champion.location.create') }}" label="Add Donation Center" primary />
+                </div>
+
+                <x-card title="Donation Center">
+                    <!--
+                      Heads up! 👋
+
+                      This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+                    -->
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -78,10 +60,7 @@
                                     Name
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    Date
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    Status
+                                    Address
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                     Action
@@ -90,27 +69,38 @@
                             </thead>
 
                             <tbody class="divide-y divide-gray-200">
-                            @foreach($applications as $applicant)
+                            @forelse($locations as $loc)
                                 <tr>
                                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                        {{ $applicant->user->fullname() }}
+                                        {{ $loc->name }}
                                     </td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $applicant->created_at->format('m/d/Y') }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ ucfirst($applicant->status) }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $loc->address }}</td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        <x-button href="{{ route('champion.donor-application.show', [$applicant]) }}" xs sky label="View" />
+                                        <div class="flex space-x-2">
+                                            <x-button href="{{ route('champion.location.edit', [$loc]) }}" sky xs label="Edit" />
+                                            <form method="POST" action="{{ route('champion.location.destroy', [$loc]) }}">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <x-button type="submit" negative xs label="Delete" />
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="3">
+                                        <p class="px-2 py-1.5 text-center">No donation center found <br> Add a donation center so that donor know where to donate</p>
+                                    </td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
 
                         <div class="mt-4">
-                            {{ $applications->links() }}
+                            {{ $locations->links() }}
                         </div>
                     </div>
-
-
                 </x-card>
             </div>
         </div>

@@ -7,26 +7,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('champion_providers', function (Blueprint $table) {
+        Schema::create('pre_screenings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'champion_id')->nullable();
             $table->foreignIdFor(User::class, 'provider_id');
-            $table->boolean('status')->default(true);
-            $table->integer('total_milk_bags')->default(0);
+            $table->longText('content');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('champion_providers');
+        Schema::dropIfExists('pre_screenings');
     }
 };

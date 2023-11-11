@@ -20,6 +20,13 @@
                             <x-icon name="home" class="h-5 w-5"/>
                         </a>
 
+                        <a
+                            href="{{ route('provider.donate-milk') }}"
+                            class="block shrink-0 rounded-lg bg-white px-4 p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
+                        >
+                            Donate Milk
+                        </a>
+
                         <div x-data="{ isActive: false }" class="relative w-full">
                             <button
                                 x-on:click="isActive = !isActive"

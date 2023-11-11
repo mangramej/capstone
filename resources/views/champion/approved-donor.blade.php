@@ -17,7 +17,7 @@
 
         {{--            <div class="col-span-3 lg:col-span-2">--}}
         {{--                --}}
-{{--                        <livewire:champion.provider-list/>--}}
+        {{--                        <livewire:champion.provider-list/>--}}
         {{--                --}}
         {{--            </div>--}}
 
@@ -44,7 +44,7 @@
 
                         <li>
                             <a
-                                href="{{ route('champion.approved-donor') }}"
+                                href="{{ route('champion.show-milk-requests.recent') }}"
                                 class="group flex items-center justify-between rounded-lg px-4 py-2 text-gray-700 {{ request()->routeIs('champion.show-milk-requests.recent') ? 'bg-gray-100' : 'hover:bg-gray-100' }}"
                             >
                                 <span class="text-sm font-medium"> Approved Donor </span>
@@ -68,50 +68,15 @@
             </div>
 
             <div class="col-span-2">
-                <x-card title="Donor Applications">
-
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                            <thead class="ltr:text-left rtl:text-right">
-                            <tr>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    Name
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    Date
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    Status
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    Action
-                                </td>
-                            </tr>
-                            </thead>
-
-                            <tbody class="divide-y divide-gray-200">
-                            @foreach($applications as $applicant)
-                                <tr>
-                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                        {{ $applicant->user->fullname() }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $applicant->created_at->format('m/d/Y') }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ ucfirst($applicant->status) }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        <x-button href="{{ route('champion.donor-application.show', [$applicant]) }}" xs sky label="View" />
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-
-                        <div class="mt-4">
-                            {{ $applications->links() }}
-                        </div>
+                <div class="space-y-4">
+                    <div>
+                        <livewire:champion.provider-list-count/>
                     </div>
 
-
-                </x-card>
+                    <div>
+                        <livewire:champion.provider-list/>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

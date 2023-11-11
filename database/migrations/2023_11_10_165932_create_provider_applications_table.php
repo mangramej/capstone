@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PreScreening;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -7,26 +8,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('champion_providers', function (Blueprint $table) {
+        Schema::create('provider_applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'champion_id')->nullable();
             $table->foreignIdFor(User::class, 'provider_id');
-            $table->boolean('status')->default(true);
-            $table->integer('total_milk_bags')->default(0);
+            $table->foreignIdFor(PreScreening::class);
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('champion_providers');
+        Schema::dropIfExists('provider_applications');
     }
 };

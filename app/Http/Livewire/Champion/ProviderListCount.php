@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Champion;
 
 use App\Models\Champion\ChampionProvider;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ProviderListCount extends Component
@@ -25,15 +24,12 @@ class ProviderListCount extends Component
         $stats = [];
 
         if ($this->readyToLoad) {
-            $stats['total_provider_count'] = ChampionProvider::where('champion_id', Auth::id())
+            $stats['total_provider_count'] = ChampionProvider::count();
+
+            $stats['total_active_provider_count'] = ChampionProvider::where('status', true)
                 ->count();
 
-            $stats['total_active_provider_count'] = ChampionProvider::where('champion_id', Auth::id())
-                ->where('status', true)
-                ->count();
-
-            $stats['total_inactive_provider_count'] = ChampionProvider::where('champion_id', Auth::id())
-                ->where('status', false)
+            $stats['total_inactive_provider_count'] = ChampionProvider::where('status', false)
                 ->count();
         }
 

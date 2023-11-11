@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Champion\DonationCenterController;
+use App\Http\Controllers\Champion\DonorApplicationController;
 use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\MyProvidersController;
 use App\Http\Controllers\Champion\ShowMilkRequestController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Chat\ThreadController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MilkRequestDetailController;
 use App\Http\Controllers\MilkRequestReceiptController;
+use App\Http\Controllers\Provider\DonateMilkController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -92,6 +95,13 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
     Route::post('/t/{thread}/send-message', [MessageController::class, 'send'])->name('threads.message.send');
 
+    Route::middleware('type:provider')
+        ->name('provider.')
+        ->group(function () {
+            Route::get('donate-milk', [DonateMilkController::class, 'index'])->name('donate-milk');
+            Route::post('donate-milk', [DonateMilkController::class, 'store'])->name('donate-milk.store');
+        });
+
     Route::middleware('type:requester')
         ->name('requester.')
         ->group(function () {
@@ -135,5 +145,16 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::get('/milk-requests/recent', [ShowMilkRequestController::class, 'recent'])
                 ->name('show-milk-requests.recent');
+
+            Route::get('/donor-application/{providerApplication}', [DonorApplicationController::class, 'show'])
+                ->name('donor-application.show');
+
+            Route::resource('location', DonationCenterController::class);
+
+            Route::post('/donor-application/{providerApplication}', [DonorApplicationController::class, 'approve'])
+                ->name('donor-application.approve');
+
+            Route::view('/approved-donor', 'champion.approved-donor')
+                ->name('approved-donor');
         });
 });

@@ -50,8 +50,7 @@ class DashboardController extends Controller
 
         $total_declined_milk_request = DeclinedRequest::count();
 
-        $total_provider = ChampionProvider::where('champion_id', Auth::id())
-            ->count();
+        $total_provider = ChampionProvider::count();
 
         return view('champion.dashboard', compact([
             'total_milk_bags',
@@ -72,12 +71,11 @@ class DashboardController extends Controller
 
     private function provider(): View
     {
-        $milk_bags = ChampionProvider::with('champion:id,first_name,middle_name,last_name,email')
-            ->withSum(['transactions' => function ($query) {
-                $query->where('type', 'added');
-            }], 'quantity')
+        $milk_bags = ChampionProvider::with(['transactions' => function ($query) {
+            $query->where('type', 'added');
+        }])
             ->where('provider_id', Auth::id())
-            ->get();
+            ->first();
 
         return view('provider.dashboard', compact('milk_bags'));
     }

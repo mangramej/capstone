@@ -54,7 +54,7 @@ class ChampionRepository
         }
 
         $milkBag = ChampionProvider::where('provider_id', $provider->id)
-            ->where('champion_id', $this->champion->id)
+//            ->where('champion_id', $this->champion->id)
             ->first();
 
         if ($milkBag) {
@@ -78,7 +78,7 @@ class ChampionRepository
     public function deductMilkBag(MilkRequest $milkRequest, User $provider): static
     {
         $milkBag = ChampionProvider::where('provider_id', $provider->id)
-            ->where('champion_id', $this->champion->id)
+//            ->where('champion_id', $this->champion->id)
             ->first();
 
         if ($milkBag->total_milk_bags < $milkRequest->quantity) {

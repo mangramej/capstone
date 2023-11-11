@@ -25,7 +25,7 @@ class MilkBagTotalCount extends Component
         return view('livewire.champion.milk-bag-total-count', [
             'count' => $this->readyToLoad
                 ? ChampionProvider::query()
-                    ->where('champion_id', Auth::id())
+//                    ->where('champion_id', Auth::id())
                     ->sum('total_milk_bags')
                 : 0,
         ]);

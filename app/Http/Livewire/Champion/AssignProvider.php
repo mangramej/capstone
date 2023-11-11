@@ -108,7 +108,7 @@ class AssignProvider extends Component
                 $query->select(DB::raw(1))
                     ->from('champion_providers')
                     ->where('champion_providers.status', true)
-                    ->where('champion_providers.champion_id', Auth::id())
+//                    ->where('champion_providers.champion_id', Auth::id())
                     ->whereColumn('champion_providers.provider_id', 'users.id');
             })->get();
 

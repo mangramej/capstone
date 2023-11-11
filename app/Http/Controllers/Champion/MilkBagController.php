@@ -15,7 +15,7 @@ class MilkBagController extends Controller
 
     public function show(Request $request, ChampionProvider $championProvider)
     {
-        abort_if($request->user()->id !== $championProvider->champion_id, 403);
+        //        abort_if($request->user()->id !== $championProvider->champion_id, 403);
 
         $championProvider->load(['transactions', 'provider:id,first_name,middle_name,last_name,email']);
 

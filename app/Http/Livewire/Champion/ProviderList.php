@@ -60,7 +60,7 @@ class ProviderList extends Component
             'providers' => $this->readyToLoad
                 ? ChampionProvider::with('provider:id,first_name,middle_name,last_name')
                     ->select('id', 'status', 'provider_id', 'created_at')
-                    ->where('champion_id', Auth::id())
+//                    ->where('champion_id', Auth::id())
                     ->when(! is_null($this->status), function ($query) {
                         if ($this->status === 'active') {
                             $query->where('status', true);

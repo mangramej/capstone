@@ -64,7 +64,7 @@ class AddMilkBag extends Component
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('champion_providers')
-                    ->where('champion_providers.champion_id', Auth::id())
+//                    ->where('champion_providers.champion_id', Auth::id())
                     ->where('champion_providers.status', true)
                     ->whereColumn('champion_providers.provider_id', 'users.id');
             })

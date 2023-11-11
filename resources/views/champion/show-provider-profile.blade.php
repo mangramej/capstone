@@ -51,6 +51,20 @@
                 </dl>
             </div>
         </div>
+
+
+        @if($preScreen)
+        <x-card title="Pre Screening">
+            <div class="space-y-2">
+                @foreach(unserialize($preScreen->content) as $item)
+                    <div>
+                        <label>{{ $item['question'] }}</label>
+                        <input type="text" value="{{ $item['answer'] }}" class="rounded-lg shadow bg-gray-50 font-semibold text-sm" readonly>
+                    </div>
+                @endforeach
+            </div>
+        </x-card>
+        @endif
     </div>
 
 @endsection

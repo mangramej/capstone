@@ -28,7 +28,7 @@ class MilkBagTransactionList extends Component
         return view('livewire.champion.milk-bag-transaction-list', [
             'transactions' => $this->readyToLoad
                 ? ChampionProvider::with(['provider:id,first_name,middle_name,last_name'])
-                    ->where('champion_id', Auth::id())
+//                    ->where('champion_id', Auth::id())
                     ->paginate()
                     ->withQueryString()
                 : collect()->paginate(),

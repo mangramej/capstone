@@ -14,7 +14,7 @@
 
         <div class="w-full sm:w-fit">
             <h1 class="text-end text-2xl font-bold text-gray-900 sm:text-3xl">
-                {{ $milk_bags->sum('transactions_sum_quantity') }}
+                {{ $milk_bags->total_milk_bags }}
             </h1>
 
             <p class="text-end mt-1.5 text-sm text-gray-500">
@@ -29,26 +29,14 @@
         <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
 
             <section class="mt-4 bg-white rounded-lg shadow text-gray-700 px-4">
-                @if($milk_bags->isNotEmpty())
+                @if($milk_bags)
                     <ul class="divide-y">
-                        @foreach($milk_bags as $t)
+                        @foreach($milk_bags->transactions as $t)
 
-                            <li class="grid grid-cols-4 py-2 w-full border-b border-b-gray-100">
-                                <div class="col-span-2">
-                                    <div class="px-4">
-                                        <span class="font-semibold block">
-                                            {{ $t->champion->fullname() }}
-                                        </span>
-
-                                        <span class="block text-xs sm:text-sm text-gray-500">
-                                            Champion Name
-                                        </span>
-                                    </div>
-                                </div>
-
+                            <li class="grid grid-cols-2 py-2 w-full border-b border-b-gray-100">
                                 <div class="col-span-1">
                                     <span class="font-semibold block">
-                                        {{ $t->transactions_sum_quantity }} Milk bags
+                                        {{ $t->quantity }} Milk bags
                                     </span>
 
                                             <span class="block text-xs sm:text-sm text-gray-500">

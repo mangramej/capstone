@@ -107,4 +107,9 @@ class User extends Authenticatable //implements MustVerifyEmail
     {
         return $this->morphOne('App\Models\ModelHasRole', 'model');
     }
+
+    public function preScreening()
+    {
+        return $this->hasOne(PreScreening::class, 'provider_id', 'id');
+    }
 }
