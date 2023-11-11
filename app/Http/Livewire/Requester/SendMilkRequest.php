@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Requester;
 
 use App\Models\Requester\MilkRequest;
+use App\Modules\Services\MilkRequestService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -87,6 +88,11 @@ class SendMilkRequest extends Component
             title: __('requester.sent.title'),
             description: __('requester.sent.description')
         );
+
+        MilkRequestService::for($milkRequest)
+            ->notifyRequester(
+                message: 'Great, your request has been sent and might take up days to process, kindly please wait.'
+            );
 
         $this->dispatchBrowserEvent('close');
 
