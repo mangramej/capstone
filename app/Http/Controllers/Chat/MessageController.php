@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Chat;
 use App\Events\Chat\MessageSent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Thread;
+use App\Models\User;
+use App\Notifications\NewMessageNotification;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -19,6 +21,19 @@ class MessageController extends Controller
             'user_id' => auth()->id(),
             'content' => $request->input('content'),
         ]);
+
+        $other = $thread->participants()
+            ->where('thread_id', $thread->id)
+            ->whereNot('user_id', auth()->id())
+            ->first();
+
+        $user = User::find($other->user_id);
+
+        if (! $user->unreadNotifications()->where('data->type', 'new-message')->exists()) {
+            $user->notify(
+                new NewMessageNotification($thread, 'You got a new message from '.auth()->user()->fullname())
+            );
+        }
 
         MessageSent::dispatch($message);
 

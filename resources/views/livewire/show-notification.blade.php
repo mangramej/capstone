@@ -46,11 +46,14 @@
                     role="menuitem"
                     tabindex="-1"
                 >
-                    <span>Milk Request: <b>{{ $el->data['milk_request']['ref_number'] }}</b></span> <br>
+                    @if($el->data['type'] == 'milk-request')
+                        <span>Milk Request: <b>{{ $el->data['milk_request']['ref_number'] }}</b></span> <br>
+                    @endif
+
                     <span class="text-gray-600 text-xs">{{ $el->data['message'] }}</span> <br>
                     <span class="mt-2 text-gray-400 text-xs">
-                {{ $el->created_at->diffForHumans() }}
-            </span>
+                        {{ $el->created_at->diffForHumans() }}
+                    </span>
                 </a>
             @empty
                 <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">

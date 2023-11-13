@@ -23,7 +23,13 @@ class ShowNotification extends Component
             ->where('id', $notif['id'])
             ->markAsRead();
 
-        return to_route('requester.milk-request-detail', [$notif['data']['milk_request']['ref_number']]);
+        if ($notif['data']['type'] == 'milk-request') {
+            return to_route('requester.milk-request-detail', [$notif['data']['milk_request']['ref_number']]);
+        }
+
+        if ($notif['data']['type'] == 'new-message') {
+            return to_route('threads.messages', [$notif['data']['thread_id']]);
+        }
     }
 
     public function markAllAsRead(): void
