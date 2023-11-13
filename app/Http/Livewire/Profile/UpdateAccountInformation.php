@@ -23,11 +23,12 @@ class UpdateAccountInformation extends Component
 
     public $newPasswordConfirmation;
 
-    public User $user;
+    public $user;
 
-    public function mount(User $user = null): void
+    public function mount($user = null)
     {
         $this->user = $user ?? Auth::user();
+        $this->email = $this->user->email;
     }
 
     public function save(): void
@@ -61,19 +62,17 @@ class UpdateAccountInformation extends Component
 
         $this->user->save();
 
-        $this->alert(
-            type: 'success',
-            title: 'Profile Update',
-            description: 'Account information has been updated.'
-        );
-
-        $this->reset();
+        if ($this->user->wasChanged()) {
+            $this->alert(
+                type: 'success',
+                title: 'Profile Update',
+                description: 'Account information has been updated.'
+            );
+        }
     }
 
     public function render(): View
     {
-        $this->email = $this->user->email;
-
         return view('livewire.profile.update-account-information');
     }
 }
