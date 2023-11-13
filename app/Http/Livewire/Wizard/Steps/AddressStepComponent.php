@@ -41,7 +41,7 @@ class AddressStepComponent extends StepComponent
         //        'selectedProvince' => ['required', 'string'],
         'selectedCity' => ['required', 'string'],
         'selectedBarangay' => ['required'],
-        'zip_code' => ['required', 'string'],
+        'zip_code' => ['required', 'numeric'],
     ];
 
     protected $messages = [
@@ -49,7 +49,7 @@ class AddressStepComponent extends StepComponent
         //        'selectedProvince.required' => 'Choose at least one province.',
         'selectedCity.required' => 'Choose at least one city.',
         'selectedBarangay.required' => 'Choose at least one barangay.',
-        'zip_code' => 'The Zip Code cannot be empty.',
+        //        'zip_code.required' => 'The Zip Code cannot be empty.',
     ];
 
     public function mount(): void
