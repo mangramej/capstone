@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ProviderApplication extends Model
 {
     protected $fillable = [
-        'provider_id', 'pre_screening_id',
+        'provider_id', 'pre_screening_id', 'application_id',
     ];
 
     public function user(): BelongsTo
@@ -19,5 +19,27 @@ class ProviderApplication extends Model
     public function preScreening(): BelongsTo
     {
         return $this->belongsTo(PreScreening::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (ProviderApplication $application) {
+            $application->application_id = bin2hex(random_bytes(5));
+        });
+    }
+
+    public function isPending(): bool
+    {
+        return $this->status === 'pending';
+    }
+
+    public function isDeclined(): bool
+    {
+        return $this->status === 'declined';
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->status === 'approved';
     }
 }

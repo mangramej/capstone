@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Champion\ChampionProvider;
+use App\Models\Champion\MilkBagTransaction;
 use App\Models\DeclinedRequest;
+use App\Models\Location;
 use App\Models\Requester\MilkRequest;
 use App\Models\User;
 use App\Modules\Enums\MilkRequestStatus;
@@ -71,13 +73,33 @@ class DashboardController extends Controller
 
     private function provider(): View
     {
-        $milk_bags = ChampionProvider::with(['transactions' => function ($query) {
-            $query->where('type', 'added');
-        }])
-            ->where('provider_id', Auth::id())
+        //        $milk_bags = ChampionProvider::with(['transactions' => function ($query) {
+        //            $query->where('type', 'added');
+        //        }])
+        //            ->where('provider_id', Auth::id())
+        //            ->first();
+
+        $milk_bags = ChampionProvider::where('provider_id', Auth::id())
             ->first();
 
-        return view('provider.dashboard', compact('milk_bags'));
+        $transactions = collect();
+
+        if ($milk_bags) {
+            $transactions = MilkBagTransaction::where('owner_id', $milk_bags->id)
+                ->where('type', 'added')
+                ->paginate(9)
+                ->withQueryString();
+        }
+
+        $user = Auth::user()->load('donorApplication');
+
+        $locations = null;
+
+        if ($user->donorApplication) {
+            $locations = Location::all();
+        }
+
+        return view('provider.dashboard', compact('milk_bags', 'transactions', 'locations'));
     }
 
     private function admin(Request $request): View

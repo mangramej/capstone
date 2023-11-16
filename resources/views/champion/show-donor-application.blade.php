@@ -56,13 +56,23 @@
             <div class="col-span-2 space-y-4">
                 <div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                        <div class="col-span-3">
+                        <div class="col-span-3 flex gap-4">
                             <form action="{{ route('champion.donor-application.approve', [$providerApplication]) }}" method="POST">
                                 @csrf
 
                                 <x-button
                                     type="submit"
                                     amber label="Approve Donor"
+                                />
+                            </form>
+
+                            <form action="{{ route('champion.donor-application.decline', [$providerApplication]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <x-button
+                                    type="submit"
+                                    negative label="Decline Donor"
                                 />
                             </form>
                         </div>

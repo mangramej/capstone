@@ -7,6 +7,7 @@ use App\Modules\Enums\UserEnum;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Yajra\Address\Entities\Barangay;
 use Yajra\Address\HasAddress;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable //implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasAddress, HasRoles;
 
@@ -111,5 +112,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function preScreening()
     {
         return $this->hasOne(PreScreening::class, 'provider_id', 'id');
+    }
+
+    public function donorApplication(): HasOne
+    {
+        return $this->hasOne(ProviderApplication::class, 'provider_id');
     }
 }

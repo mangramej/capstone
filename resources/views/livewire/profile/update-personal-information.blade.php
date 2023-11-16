@@ -1,4 +1,4 @@
-<section id="personal--info" class="bg-white p-6 rounded-md shadow w-full lg:w-2/3">
+<section id="personal--info" class="bg-white p-6 rounded-md shadow-md w-full">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Personal Information') }}

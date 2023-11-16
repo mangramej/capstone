@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
-use App\Models\Location;
 use App\Models\PreScreening;
 use App\Models\ProviderApplication;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DonateMilkController extends Controller
 {
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
-        $hasAnsweredAlready = Auth::user()->preScreening;
+        if (Auth::user()->donorApplication) {
+            return to_route('dashboard');
+        }
 
-        $locations = Location::all();
-
-        return view('provider.donate-milk', compact('hasAnsweredAlready', 'locations'));
+        return view('provider.donate-milk');
     }
 
     public function store(Request $request)
@@ -75,6 +75,6 @@ class DonateMilkController extends Controller
             'pre_screening_id' => $preScreening->id,
         ]);
 
-        return to_route('provider.donate-milk');
+        return to_route('dashboard');
     }
 }

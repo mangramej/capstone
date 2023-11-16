@@ -154,6 +154,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
             Route::post('/donor-application/{providerApplication}', [DonorApplicationController::class, 'approve'])
                 ->name('donor-application.approve');
 
+            Route::delete('/donor-application/{providerApplication}', [DonorApplicationController::class, 'decline'])
+                ->name('donor-application.decline');
+
             Route::view('/approved-donor', 'champion.approved-donor')
                 ->name('approved-donor');
         });

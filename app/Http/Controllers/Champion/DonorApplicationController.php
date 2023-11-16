@@ -33,4 +33,12 @@ class DonorApplicationController extends Controller
 
         return to_route('champion.my-providers');
     }
+
+    public function decline(ProviderApplication $providerApplication)
+    {
+        $providerApplication->status = 'declined';
+        $providerApplication->save();
+
+        return to_route('champion.my-providers');
+    }
 }
