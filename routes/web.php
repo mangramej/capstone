@@ -106,6 +106,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
         ->group(function () {
             Route::get('/my-request/{milkRequest:ref_number}', MilkRequestDetailController::class)
                 ->name('milk-request-detail');
+
+            Route::view('/get-verified', 'requester.get-verified')
+                ->name('get-verified');
         });
 
     // CHAMPION ROUTES

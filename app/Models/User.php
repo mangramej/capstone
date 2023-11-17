@@ -119,4 +119,14 @@ class User extends Authenticatable //implements MustVerifyEmail
     {
         return $this->hasOne(ProviderApplication::class, 'provider_id');
     }
+
+    public function requesterVerification(): HasOne
+    {
+        return $this->hasOne(RequesterVerification::class);
+    }
+
+    public function isVerifiedRequester(): bool
+    {
+        return $this->requesterVerification && $this->requesterVerification->status;
+    }
 }

@@ -1,9 +1,9 @@
 <div x-data="{ notification: false }" class="relative w-full">
     <button x-on:click="notification = !notification"
-        class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
+        class="block shrink-0 p-2.5 text-gray-600 hover:text-gray-700"
     >
         <div class="relative">
-            <x-icon name="bell" class="w-6 h-6"/>
+            <x-icon name="bell" class="w-10 h-10"/>
 
             @if(count($notifications) > 0)
                 <div class="absolute top-0 right-0 w-3 h-3 bg-red-600 rounded-full">

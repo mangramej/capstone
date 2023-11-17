@@ -47,7 +47,7 @@ class RecentRequests extends Component
                         $query->where('status', $this->status);
                     })
                     ->latest()
-                    ->paginate()
+                    ->paginate(8)
                 : collect()->paginate(),
         ]);
     }

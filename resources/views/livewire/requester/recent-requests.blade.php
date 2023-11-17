@@ -1,11 +1,9 @@
-<div class="p-4" wire:init="loadMilkRequests">
-    <h1 class="font-medium text-lg">Recent Requests</h1>
+<div class="px-4 h-[525px]" wire:init="loadMilkRequests">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-gray-700 font-bold text-xl uppercase">Requester Dashboard</h1>
 
-    <div class="w-full lg:w-2/3 mt-4">
-        <small class="text-gray-500">Filter:</small>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-
-            <x-native-select label="Select Status" wire:model="status">
+        <div>
+            <x-native-select label="Filter: Select Status" wire:model="status">
                 <option value="all">All</option>
                 <option value="pending">Pending</option>
                 <option value="accepted">Accepted</option>
@@ -25,10 +23,10 @@
                         Reference Number
                     </th>
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                        Date
+                        Bags
                     </th>
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
-                        Bags
+                        Date
                     </th>
                     <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-600 uppercase">
                         Status
@@ -44,11 +42,11 @@
                         <td class="whitespace-nowrap p-4 font-medium text-gray-900">
                             {{ $request->ref_number }}
                         </td>
-                        <td class="whitespace-nowrap p-4 text-gray-600">
-                            {{ $request->created_at->format('m/d/Y') }}
-                        </td>
                         <td class="whitespace-nowrap p-4 text-gray-700 font-bold">
                             {{ $request->quantity }}
+                        </td>
+                        <td class="whitespace-nowrap p-4 text-gray-600">
+                            {{ $request->created_at->format('m/d/Y') }}
                         </td>
                         <td class="whitespace-nowrap p-4 text-gray-700">
                             <x-status-badge :status="$request->status" />
