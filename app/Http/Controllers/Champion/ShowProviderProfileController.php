@@ -31,6 +31,8 @@ class ShowProviderProfileController extends Controller
         $preScreen = PreScreening::where('provider_id', $milk_bag->provider_id)
             ->first();
 
+        $user->load('donorApplication.attachments');
+
         return view('champion.show-provider-profile', compact(
             'user',
             'milk_bag',

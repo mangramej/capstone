@@ -1,8 +1,8 @@
 <div wire:init="load">
     @if($readToLoad)
         @if($milkRequest)
-        <div class="grid grid-cols-3 gap-2">
-            <div class="col-span-3">
+        <div class="grid grid-cols-4 gap-2">
+            <div class="col-span-4">
                 <div class="grid grid-cols-3 gap-2">
                     <div class="col-span-2">
                         <div class="flex justify-between items-center">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3">
                 <x-card title="Milk Request Details">
                     <div class="flow-root">
                         <dl class="-my-3 divide-y divide-gray-100 text-sm">
@@ -54,11 +54,6 @@
                                 <dt class="font-medium text-gray-900">Mother Name</dt>
                                 <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->mother_name }}</dd>
                             </div>
-
-{{--                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">--}}
-{{--                                <dt class="font-medium text-gray-900">Baby Name</dt>--}}
-{{--                                <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->baby_name }}</dd>--}}
-{{--                            </div>--}}
 
                             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                                 <dt class="font-medium text-gray-900">No of Bags</dt>
@@ -100,8 +95,9 @@
         </div>
         @else
             <div class="bg-white rounded-lg shadow h-[600px] flex justify-center items-center opacity-75">
-                <div class="text-center space-y-4">
-                    <span class="font-medium">No milk request available ...</span> <br>
+                <div class="text-center">
+                    <x-svg.two-document class="w-96 h-96 mb-4" />
+                    <span class="text-3xl text-gray-400 font-medium uppercase">No milk request available</span>
                 </div>
             </div>
         @endif

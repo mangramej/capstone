@@ -24,8 +24,12 @@
                 },
             }
         });
-        FilePond.create($refs.input);
+        const pond = FilePond.create($refs.input);
+
+        this.addEventListener('pondReset', e => {
+            pond.removeFiles();
+        });
     "
 >
-    <input type="file" x-ref="input">
+    <input type="file" x-ref="input" {{ isset($attributes['multiple']) ? 'multiple' : '' }}>
 </div>

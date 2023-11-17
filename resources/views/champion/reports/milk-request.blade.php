@@ -1,9 +1,5 @@
-@extends('layouts.champion')
+@extends('components.champion.layout')
 
 @section('content')
-    <section>
-        <div class="mx-auto max-w-screen-xl py-8 sm:px-6 lg:px-8">
-            <livewire:champion.report.milk-request />
-        </div>
-    </section>
+    <livewire:champion.report.milk-request/>
 @endsection

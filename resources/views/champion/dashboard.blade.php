@@ -1,117 +1,113 @@
-@extends('layouts.champion')
+@extends('components.champion.layout')
 
 @section('content')
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="rounded-lg border-l-4 border-yellow-600 bg-white p-6 shadow">
-            <div>
-                <p class="text-gray-500">Available Bags</p>
+    <div class="grid grid-cols-3 rounded-lg shadow-md bg-white">
+        <div class="bg-[#EEE3CB] rounded-lg shadow-md text-gray-700 p-4 h-full flex items-center ">
+            <div class="divide-y-2 divide-gray-400">
+                <div class="py-6 w-full grid grid-cols-2 gap-4 items-center">
+                    <div class="flex justify-end">
+                        <div
+                            class="w-[125px] h-[125px] bg-yellow-200 rounded-full border-4 border-gray-800 flex items-center justify-center">
+                            <span class="font-bold text-6xl">
+                                {{ $total_milk_bags }}
+                            </span>
+                        </div>
+                    </div>
+                    <span class="font-bold uppercase">
+                        Available Milk Bags
+                    </span>
+                </div>
 
-                <p class="text-2xl font-medium text-gray-900">{{ $total_milk_bags }}</p>
+                <div class="py-6 w-full grid grid-cols-2 gap-4 items-center">
+                    <div class="flex justify-end">
+                        <div
+                            class="w-[125px] h-[125px] bg-blue-600 text-white rounded-full border-4 border-cyan-800 flex items-center justify-center">
+                            <span class="font-bold text-6xl">
+                                {{ $total_milk_requests }}
+                            </span>
+                        </div>
+                    </div>
+                    <span class="font-bold uppercase">
+                        Milk Requests
+                    </span>
+                </div>
+
+                <div class="py-6 w-full grid grid-cols-2 gap-4 items-center">
+                    <div class="flex justify-end">
+                        <div
+                            class="w-[125px] h-[125px] bg-purple-600 text-white rounded-full border-4 border-purple-800 flex items-center justify-center">
+                            <span class="font-bold text-6xl">
+                                {{ $total_provider }}
+                            </span>
+                        </div>
+                    </div>
+                    <span class="font-bold uppercase">
+                        Providers
+                    </span>
+                </div>
             </div>
         </div>
 
-        <div class="rounded-lg border-l-4 border-violet-600 bg-white p-6 shadow">
-            <div>
-                <p class="text-gray-500">Providers</p>
+        <div class="col-span-2 p-4">
+            <div class="flex flex-col h-full">
+                <div class="w-full p-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex justify-center items-center">
+                            <div
+                                class="w-[250px] h-[250px] rounded-full border-4 shadow-sm bg-green-600 border-green-800 flex flex-col items-center justify-center">
+                                <span class="font-bold text-8xl text-gray-800">
+                                    {{ $total_confirmed_milk_request }}
+                                </span>
+                                <span class="font-bold uppercase text-gray-800 text-xs">
+                                    Requests Completed
+                                </span>
+                            </div>
+                        </div>
 
-                <p class="text-2xl font-medium text-gray-900">{{ $total_provider }}</p>
-            </div>
-        </div>
+                        <div class="flex justify-center items-center">
+                            <div
+                                class="w-[250px] h-[250px] rounded-full border-4 shadow-sm bg-red-500 border-red-800 flex flex-col items-center justify-center">
+                                <span class="font-bold text-8xl text-white">
+                                    {{ $total_declined_milk_request }}
+                                </span>
+                                <span class="font-bold uppercase text-white text-xs">
+                                    Requests Declined
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="rounded-lg border-l-4 border-sky-600 bg-white p-6 shadow">
-            <div>
-                <p class="text-gray-500">Milk Requests</p>
+                <div class="w-full mt-auto border-t-2 border-gray-400 py-6">
+                    <div class="grid grid-cols-2">
+                        <div class="flex justify-center items-center gap-4">
+                            <div
+                                class="w-[125px] h-[125px] rounded-full border-4 border-gray-800 flex items-center justify-center">
+                                <span class="font-bold text-6xl text-gray-800">
+                                    {{ $total_pending_milk_request }}
+                                </span>
+                            </div>
 
-                <p class="text-2xl font-medium text-gray-900">{{ $total_milk_requests }}</p>
-            </div>
-        </div>
+                            <span class="font-bold uppercase text-gray-800">
+                                Pending Requests
+                            </span>
+                        </div>
 
-        <div class="rounded-lg border-l-4 border-green-600 bg-white p-6 shadow">
-            <div>
-                <p class="text-gray-500">Accepted Requests</p>
+                        <div class="flex justify-center items-center gap-4">
+                            <div
+                                class="w-[125px] h-[125px] rounded-full border-4 border-gray-800 flex items-center justify-center">
+                                <span class="font-bold text-6xl text-gray-800">
+                                    {{ $total_pending_donor_application }}
+                                </span>
+                            </div>
 
-                <p class="text-2xl font-medium text-gray-900">{{ $total_accepted_milk_request }}</p>
-            </div>
-        </div>
-
-        <div class="rounded-lg border-l-4 border-red-600 bg-white p-6 shadow">
-            <div>
-                <p class="text-gray-500">Declined Requests</p>
-
-                <p class="text-2xl font-medium text-gray-900">{{ $total_declined_milk_request }}</p>
-            </div>
-        </div>
-
-        <div class="rounded-lg border-l-4 border-pink-600 bg-white p-6 shadow">
-            <div>
-                <p class="text-gray-500">Confirmed Requests</p>
-
-                <p class="text-2xl font-medium text-gray-900">{{ $total_confirmed_milk_request }}</p>
+                            <span class="font-bold uppercase text-gray-800">
+                                Pending Donor
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-{{--            <x-card>--}}
-{{--                <livewire:champion.milk-request-list/>--}}
-{{--            </x-card>--}}
-
-{{--        <div>--}}
-{{--            <div class="rounded-lg border border-gray-100 bg-white p-6 shadow">--}}
-{{--                <div>--}}
-{{--                    <p class="text-gray-500">Request</p>--}}
-
-{{--                    <p class="text-2xl font-medium text-gray-900">{{ $total_milk_requests }}</p>--}}
-{{--                </div>--}}
-
-{{--                <div class="mt-2 bg-gray-100 rounded p-1">--}}
-{{--                    <table class="min-w-full divide-y-2 divide-gray-200 text-sm">--}}
-{{--                        <thead>--}}
-{{--                        <tr>--}}
-{{--                            <td colspan="2"--}}
-{{--                                class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">--}}
-{{--                                Breakdown--}}
-{{--                            </td>--}}
-{{--                            <td class="text-end whitespace-nowrap px-4 py-2 font-medium text-gray-900">--}}
-{{--                                Status--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                        </thead>--}}
-{{--                        <tbody class="divide-y divide-gray-200">--}}
-{{--                        <tr>--}}
-{{--                            <td colspan="2"--}}
-{{--                                class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $total_accepted_milk_request }}</td>--}}
-{{--                            <td class="text-end whitespace-nowrap px-4 py-2 text-green-700">--}}
-{{--                                <x-badge rounded positive label="Accepted"/>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-
-{{--                        <tr>--}}
-{{--                            <td colspan="2"--}}
-{{--                                class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $total_assigned_milk_request }}</td>--}}
-{{--                            <td class="text-end whitespace-nowrap px-4 py-2 text-sky-700">--}}
-{{--                                <x-badge rounded primary label="Provider Assigned"/>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-
-{{--                        <tr>--}}
-{{--                            <td colspan="2"--}}
-{{--                                class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $total_delivered_milk_request }}</td>--}}
-{{--                            <td class="text-end whitespace-nowrap px-4 py-2 text-violet-700">--}}
-{{--                                <x-badge rounded violet label="Delivered"/>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-
-{{--                        <tr>--}}
-{{--                            <td colspan="2"--}}
-{{--                                class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $total_confirmed_milk_request }}</td>--}}
-{{--                            <td class="text-end whitespace-nowrap px-4 py-2 text-gray-700">--}}
-{{--                                <x-badge rounded secondary label="Confirmed"/>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                        </tbody>--}}
-{{--                    </table>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 @endsection

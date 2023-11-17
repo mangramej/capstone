@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProviderApplication extends Model
 {
@@ -41,5 +42,10 @@ class ProviderApplication extends Model
     public function isApproved(): bool
     {
         return $this->status === 'approved';
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(ProviderApplicationAttachment::class);
     }
 }

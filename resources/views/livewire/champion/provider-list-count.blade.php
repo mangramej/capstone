@@ -1,30 +1,45 @@
-<article class="rounded-lg border border-gray-100 bg-white p-6 shadow" wire:init="load">
-    @if($readyToLoad)
-        <div>
-            <p class="text-gray-500">Total Providers</p>
-
-            <p class="text-2xl font-medium text-gray-900">{{ $stats['total_provider_count']}}</p>
-        </div>
-
-
-        <div class="mt-2 bg-gray-100 p-4 rounded">
-            <p class="flex gap-2 text-sm text-gray-600">
-                <span class="font-medium"> {{ $stats['total_active_provider_count'] }} - <span class="text-green-600">Active</span>  </span>
-            </p>
-
-            <p class="flex gap-2 text-sm text-gray-600">
-                <span class="font-medium"> {{ $stats['total_inactive_provider_count'] }} - <span class="text-red-600">Inactive</span>  </span>
-            </p>
-        </div>
-
-    @else
-        <div class="text-center space-y-4">
-            <span class="text-gray-600 font-medium">Fetching Results</span> <br>
-            <div
-                class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-                role="status" aria-label="loading">
-                <span class="sr-only">Loading...</span>
+<div class="bg-[#EEE3CB] rounded-lg shadow-md text-gray-700 h-fit flex items-center justify-center">
+    <div class="divide-y-2 divide-gray-400">
+        <div class="py-6 w-full grid grid-cols-2 gap-4 items-center" >
+            <div class="flex justify-end">
+                <div
+                    class="w-[125px] h-[125px] bg-yellow-200 rounded-full border-4 border-gray-800 flex items-center justify-center">
+                    <span class="font-bold text-6xl">
+                        {{ $stats['total_provider_count']}}
+                    </span>
+                </div>
             </div>
+            <span class="font-bold uppercase">
+                Provider
+            </span>
         </div>
-    @endif
-</article>
+
+        <div class="py-6 w-full grid grid-cols-2 gap-4 items-center" >
+            <div class="flex justify-end">
+                <div
+                    class="w-[125px] h-[125px] bg-green-200 rounded-full border-4 border-green-800 flex items-center justify-center">
+                    <span class="font-bold text-6xl">
+                        {{ $stats['total_active_provider_count'] }}
+                    </span>
+                </div>
+            </div>
+            <span class="font-bold uppercase">
+                Active
+            </span>
+        </div>
+
+        <div class="py-6 w-full grid grid-cols-2 gap-4 items-center">
+            <div class="flex justify-end">
+                <div
+                    class="w-[125px] h-[125px] bg-red-600 text-white rounded-full border-4 border-red-800 flex items-center justify-center">
+                    <span class="font-bold text-6xl">
+                        {{ $stats['total_inactive_provider_count'] }}
+                    </span>
+                </div>
+            </div>
+            <span class="font-bold uppercase">
+                Inactive
+            </span>
+        </div>
+    </div>
+</div>

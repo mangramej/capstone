@@ -2,7 +2,7 @@
 <div class="p-4" wire:init="load">
 
     <div class="flex justify-between items-center">
-        <h1 class="font-medium text-lg">Recent Requests</h1>
+        <h1 class="font-medium text-lg uppercase">Request List</h1>
         <x-button.circle wire:click="$refresh" primary icon="refresh" spinner/>
     </div>
 

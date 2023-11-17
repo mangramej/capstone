@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\DonationCenterController;
 use App\Http\Controllers\Champion\DonorApplicationController;
 use App\Http\Controllers\Champion\MilkBagController;
-use App\Http\Controllers\Champion\MyProvidersController;
 use App\Http\Controllers\Champion\ShowMilkRequestController;
 use App\Http\Controllers\Champion\ShowProviderProfileController;
 use App\Http\Controllers\Champion\ShowRequesterRequestHistoryController;
@@ -113,9 +112,6 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
     Route::middleware('type:champion')
         ->name('champion.')
         ->group(function () {
-            Route::get('/my-providers', MyProvidersController::class)
-                ->name('my-providers');
-
             Route::get('/milk-bag', [MilkBagController::class, 'index'])
                 ->name('milk-bag.index');
 
@@ -131,9 +127,6 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
             Route::get('/requester-history/{user}', ShowRequesterRequestHistoryController::class)
                 ->name('show-requester-request-history');
 
-            Route::get('/provider/{user}/profile', ShowProviderProfileController::class)
-                ->name('show-provider-profile');
-
             Route::view('/reports/milk-requests', 'champion.reports.milk-request')
                 ->name('reports.milk-requests');
 
@@ -146,18 +139,23 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
             Route::get('/milk-requests/recent', [ShowMilkRequestController::class, 'recent'])
                 ->name('show-milk-requests.recent');
 
-            Route::get('/donor-application/{providerApplication}', [DonorApplicationController::class, 'show'])
-                ->name('donor-application.show');
-
             Route::resource('location', DonationCenterController::class);
 
-            Route::post('/donor-application/{providerApplication}', [DonorApplicationController::class, 'approve'])
-                ->name('donor-application.approve');
+            Route::name('my-providers.')->group(function () {
+                Route::get('/provider/{user}/profile', ShowProviderProfileController::class)
+                    ->name('show-provider-profile');
 
-            Route::delete('/donor-application/{providerApplication}', [DonorApplicationController::class, 'decline'])
-                ->name('donor-application.decline');
+                Route::view('/approved-donor', 'champion.approved-donor')
+                    ->name('approved-donor');
 
-            Route::view('/approved-donor', 'champion.approved-donor')
-                ->name('approved-donor');
+                Route::get('/donor-application', [DonorApplicationController::class, 'index'])
+                    ->name('donor-application.index');
+
+                Route::post('/donor-application/{providerApplication}', [DonorApplicationController::class, 'approve'])
+                    ->name('donor-application.approve');
+
+                Route::delete('/donor-application/{providerApplication}', [DonorApplicationController::class, 'decline'])
+                    ->name('donor-application.decline');
+            });
         });
 });

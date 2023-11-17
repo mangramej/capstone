@@ -6,6 +6,7 @@ use App\Models\Champion\ChampionProvider;
 use App\Models\Champion\MilkBagTransaction;
 use App\Models\DeclinedRequest;
 use App\Models\Location;
+use App\Models\ProviderApplication;
 use App\Models\Requester\MilkRequest;
 use App\Models\User;
 use App\Modules\Enums\MilkRequestStatus;
@@ -50,9 +51,16 @@ class DashboardController extends Controller
             ->where('status', MilkRequestStatus::Confirmed)
             ->count();
 
+        $total_pending_milk_request = MilkRequest::query()
+            ->where('status', MilkRequestStatus::Pending)
+            ->count();
+
         $total_declined_milk_request = DeclinedRequest::count();
 
         $total_provider = ChampionProvider::count();
+
+        $total_pending_donor_application = ProviderApplication::where('status', 'pending')
+            ->count();
 
         return view('champion.dashboard', compact([
             'total_milk_bags',
@@ -63,6 +71,8 @@ class DashboardController extends Controller
             'total_confirmed_milk_request',
             'total_provider',
             'total_declined_milk_request',
+            'total_pending_milk_request',
+            'total_pending_donor_application',
         ]));
     }
 

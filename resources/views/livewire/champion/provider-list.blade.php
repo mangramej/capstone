@@ -37,7 +37,7 @@
                 @forelse($providers as $p)
                     <tr>
                         <td class="whitespace-nowrap p-4 font-medium text-gray-900">
-                            <a href="{{ route('champion.show-provider-profile', [$p->provider]) }}"
+                            <a href="{{ route('champion.my-providers.show-provider-profile', [$p->provider]) }}"
                                 class="hover:text-sky-500 underline transition ease"
                             >
                                 {{ $p->provider->fullname() }}

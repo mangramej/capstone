@@ -65,6 +65,7 @@ class User extends Authenticatable //implements MustVerifyEmail
         'password' => 'hashed',
         'type' => UserEnum::class,
         'personal_info' => PersonalInfo::class,
+        'date_of_birth' => 'datetime',
     ];
 
     public function isAccountFullyRegistered(): bool

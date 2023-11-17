@@ -1,4 +1,4 @@
-@extends('layouts.champion')
+@extends('components.champion.layout')
 
 @section('content')
     <main>
