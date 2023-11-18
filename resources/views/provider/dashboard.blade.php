@@ -172,7 +172,7 @@
                                     <div class="col-span-1">
                                         <x-card title="{{ $loc->name }}">
                                             <div class="flex space-x-2">
-                                                <div class="p-1 rounded-full bg-sky-600 text-white">
+                                                <div class="text-sky-600">
                                                     <x-icon name="location-marker" class="w-5 h-5"/>
                                                 </div>
 
