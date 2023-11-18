@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\RequesterVerificationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Champion\DonationCenterController;
 use App\Http\Controllers\Champion\DonorApplicationController;
+use App\Http\Controllers\Champion\DownloadRequesterMedicalRecordController;
 use App\Http\Controllers\Champion\MilkBagController;
 use App\Http\Controllers\Champion\ShowMilkRequestController;
 use App\Http\Controllers\Champion\ShowProviderProfileController;
@@ -78,6 +80,22 @@ Route::middleware(['auth', 'verified', 'type:admin'])
         Route::post('/admins', [AdminController::class, 'store'])->name('admin.store');
         Route::get('/admins/{user}/show', [AdminController::class, 'show'])->name('admin.show');
         Route::patch('/admin/{user}', [AdminController::class, 'update'])->name('admin.update');
+
+        Route::name('requester-verification.')
+            ->prefix('/admin/requester-verification')
+            ->group(function () {
+                Route::get('/', [RequesterVerificationController::class, 'index'])
+                    ->name('index');
+
+                Route::get('/{requesterVerification}', [RequesterVerificationController::class, 'show'])
+                    ->name('show');
+
+                Route::post('/{requesterVerification}/update-status', [RequesterVerificationController::class, 'update'])
+                    ->name('update-status');
+
+                Route::post('/{requesterVerification}/download', [RequesterVerificationController::class, 'download'])
+                    ->name('download');
+            });
     });
 
 Route::middleware(['auth', 'verified', 'registered'])->group(function () {
@@ -138,6 +156,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::get('/milk-requests/pending', [ShowMilkRequestController::class, 'pending'])
                 ->name('show-milk-requests.pending');
+
+            Route::post('/milk-requests/{requesterVerification}/download/attachment', DownloadRequesterMedicalRecordController::class)
+                ->name('download-requester-medical-record');
 
             Route::get('/milk-requests/recent', [ShowMilkRequestController::class, 'recent'])
                 ->name('show-milk-requests.recent');

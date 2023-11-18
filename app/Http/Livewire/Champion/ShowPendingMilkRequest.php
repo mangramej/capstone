@@ -36,6 +36,10 @@ class ShowPendingMilkRequest extends Component
                 ->first();
         }
 
+        if (! is_null($milkRequest)) {
+            $milkRequest->load('requester', 'requester.requesterVerification');
+        }
+
         return view('livewire.champion.show-pending-milk-request', [
             'milkRequest' => $this->readToLoad ? $milkRequest : null,
         ]);

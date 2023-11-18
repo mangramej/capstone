@@ -103,7 +103,7 @@
                     </p>
                 </div>
                 <div class="mb-6 ml-4 mt-2">
-                    <h4 class="mb-1.5 font-semibold text-gray-800">Confirmed</h4>
+                    <h4 class="mb-1.5 font-semibold text-gray-800">Completed</h4>
                     <p class="mb-3 text-gray-600 text-xs">
                         The champion confirmed that you received your request.
                     </p>

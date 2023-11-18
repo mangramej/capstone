@@ -26,7 +26,7 @@ class SendMilkRequest extends Component
 
     public $agreed = false;
 
-    public $image = null;
+    //    public $image = null;
 
     protected $rules = [
         'mother_name' => ['required', 'string', 'max:255'],
@@ -34,28 +34,39 @@ class SendMilkRequest extends Component
         //        'baby_name' => ['required', 'string', 'max:255'],
         'phone_number' => ['required', 'max:255'],
         'comment' => ['nullable', 'string', 'max:255'],
-        'image' => ['required', 'image', 'max:12000'],
+        //        'image' => ['required', 'image', 'max:12000'],
     ];
-
-    protected $messages = [
-        'image.required' => 'You must upload an image of your ID.',
-    ];
+    //
+    //    protected $messages = [
+    //        'image.required' => 'You must upload an image of your ID.',
+    //    ];
 
     public function mount(): void
     {
         $this->mother_name = Auth::user()->fullname();
         $this->phone_number = Auth::user()->phone_number;
     }
-
-    public function updatedImage(): void
-    {
-        $this->validate(['image' => 'required|image|max:12000']);
-    }
+    //
+    //    public function updatedImage(): void
+    //    {
+    //        $this->validate(['image' => 'required|image|max:12000']);
+    //    }
 
     public function save(): void
     {
         if (! $this->agreed) {
-            $this->addError('agreed', "You must read and 'Accept the terms and conditions'");
+            $this->addError('agreements', 'You must read and "Accept the terms and conditions"');
+
+            return;
+        }
+
+        if (Auth::user()->hasPendingMilkRequest()) {
+            $this->dispatchBrowserEvent('close');
+
+            $this->notification()->info(
+                title: 'Already have pending request',
+                description: 'Can only place one request at a time'
+            );
 
             return;
         }
@@ -64,12 +75,12 @@ class SendMilkRequest extends Component
 
         $validated = $this->validate();
 
-        $filename = $this->image->store('/user-'.$user->id, 'attachments');
+        //        $filename = $this->image->store('/user-'.$user->id, 'attachments');
 
         $milkRequest = MilkRequest::create(array_merge(
             $validated,
             [
-                'image' => basename($filename),
+                //                'image' => basename($filename),
                 'requester_id' => $user->id,
                 'address' => $user->address(),
             ]

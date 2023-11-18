@@ -40,12 +40,12 @@
                      alt="avatar">
                 <div>
                     <div>
-                        <x-badge violet label="Requester" />
+                        <x-badge violet label="Requester"/>
 
                         @if(auth()->user()->isVerifiedRequester())
-                            <x-badge icon="check-circle" positive label="Verified" />
+                            <x-badge icon="check-circle" positive label="Verified"/>
                         @else
-                            <x-badge icon="x-circle" negative label="Verified" />
+                            <x-badge icon="x-circle" negative label="Verified"/>
                         @endif
                     </div>
                     <span class="whitespace-nowrap font-bold">
@@ -55,7 +55,7 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <livewire:show-notification />
+                <livewire:show-notification/>
                 <x-logo/>
             </div>
         </div>
@@ -70,9 +70,26 @@
 
         <div class="col-span-1">
             <div class="flex flex-col space-y-4 items-center justify-center">
+                @if(auth()->user()->isVerifiedRequester())
+                    <button class="flex justify-center items-center"
+                            x-data=""
+                            x-on:click.prevent="$dispatch('open-modal', 'send_request_modal')"
+                    >
+                            <span
+                                class="p-2 bg-sky-600 hover:bg-sky-700 rounded-full text-white transition ease cursor-pointer">
+                                <x-icon name="plus-circle" class="w-8 h-8" solid/>
+                            </span>
+                    </button>
+
+                    <x-breeze-modal name="send_request_modal">
+                        <livewire:requester.send-milk-request/>
+                    </x-breeze-modal>
+                @endif
+
                 <div class="w-full">
                     <a href="{{ route('dashboard') }}" class="flex justify-center items-center">
-                        <span class="p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-white transition ease cursor-pointer">
+                        <span
+                            class="p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-white transition ease cursor-pointer">
                             <x-icon name="home" class="w-8 h-8"/>
                         </span>
                     </a>
@@ -80,7 +97,8 @@
 
                 <div class="w-full">
                     <a href="{{ route('threads.index') }}" class="flex justify-center items-center">
-                        <span class="p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-white transition ease cursor-pointer">
+                        <span
+                            class="p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-white transition ease cursor-pointer">
                             <x-icon name="chat-alt" class="w-8 h-8"/>
                         </span>
                     </a>

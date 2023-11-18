@@ -40,7 +40,7 @@ class UserTable extends DataTableComponent
             Column::make('Email', 'email')
                 ->searchable()
                 ->sortable(),
-            BooleanColumn::make('Verified', 'email_verified_at')
+            BooleanColumn::make('Email Status', 'email_verified_at')
                 ->sortable(),
             Column::make('Type', 'type')
                 ->format(fn ($value) => ucfirst($value->value))

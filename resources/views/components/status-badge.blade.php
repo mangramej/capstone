@@ -22,7 +22,7 @@
         @break
 
     @case(MilkRequestStatus::Confirmed)
-        <x-badge rounded secondary label="Confirmed" />
+        <x-badge rounded positive label="Completed" />
         @break
 
     @case(MilkRequestStatus::Declined)

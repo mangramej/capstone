@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Requester\MilkRequest;
 use App\Modules\Castables\PersonalInfo;
 use App\Modules\Enums\UserEnum;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -128,5 +130,18 @@ class User extends Authenticatable //implements MustVerifyEmail
     public function isVerifiedRequester(): bool
     {
         return $this->requesterVerification && $this->requesterVerification->status;
+    }
+
+    public function hasPendingMilkRequest()
+    {
+        return $this->milkRequests()
+            ->where('requester_id', $this->id)
+            ->whereNotIn('status', ['confirmed', 'declined'])
+            ->exists();
+    }
+
+    public function milkRequests(): HasMany
+    {
+        return $this->hasMany(MilkRequest::class, 'requester_id');
     }
 }

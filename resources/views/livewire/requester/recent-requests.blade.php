@@ -10,6 +10,7 @@
                 <option value="assigned">Provider Assigned</option>
                 <option value="delivered">Delivered</option>
                 <option value="confirmed">Confirmed</option>
+                <option value="declined">Declined</option>
             </x-native-select>
         </div>
     </div>

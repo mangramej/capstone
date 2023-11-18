@@ -38,7 +38,7 @@ class RecentRequests extends Component
                     ->where('requester_id', Auth::id())
                     ->when(true, function ($query) {
                         if (
-                            ! in_array($this->status, ['all', 'pending', 'accepted', 'assigned', 'delivered', 'confirmed'])
+                            ! in_array($this->status, ['all', 'pending', 'accepted', 'assigned', 'delivered', 'confirmed', 'declined'])
                             || $this->status === 'all'
                         ) {
                             return;

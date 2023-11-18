@@ -78,6 +78,8 @@ class DashboardController extends Controller
 
     private function requester(): View
     {
+        auth()->user()->hasPendingMilkRequest();
+
         return view('requester.dashboard');
     }
 

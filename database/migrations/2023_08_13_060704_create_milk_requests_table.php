@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->longText('address');
             $table->string('phone_number');
-            $table->string('image');
+            //            $table->string('image');
             $table->longText('comment')->nullable();
             $table->timestamps();
         });

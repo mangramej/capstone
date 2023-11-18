@@ -70,14 +70,6 @@
                             <dt class="font-medium text-gray-900">Address</dt>
                             <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->address }}</dd>
                         </div>
-
-                        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                            <dt class="font-medium text-gray-900">Uploaded Image ID</dt>
-                            <dd class="text-gray-700 sm:col-span-2">
-                                <img src="{{ $milkRequest->getImageUrl() }}" alt="milk request ID image">
-                            </dd>
-                        </div>
-
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium text-gray-900">Comment</dt>
                             <dd class="text-gray-700 sm:col-span-2">

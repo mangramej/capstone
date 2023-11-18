@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="col-span-3">
+            <div class="col-span-3 space-y-4">
                 <x-card title="Milk Request Details">
                     <div class="flow-root">
                         <dl class="-my-3 divide-y divide-gray-100 text-sm">
@@ -66,15 +66,13 @@
                             </div>
 
                             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                                <dt class="font-medium text-gray-900">Address</dt>
-                                <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->address }}</dd>
+                                <dt class="font-medium text-gray-900">Email</dt>
+                                <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->requester->email }}</dd>
                             </div>
 
                             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                                <dt class="font-medium text-gray-900">Uploaded Image ID</dt>
-                                <dd class="text-gray-700 sm:col-span-2">
-                                    <img src="{{ $milkRequest->getImageUrl() }}" alt="milk request ID image">
-                                </dd>
+                                <dt class="font-medium text-gray-900">Address</dt>
+                                <dd class="text-gray-700 sm:col-span-2">{{ $milkRequest->address }}</dd>
                             </div>
 
                             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
@@ -85,7 +83,78 @@
                             </div>
                         </dl>
                     </div>
+                </x-card>
 
+                <x-card title="Attachments">
+                    <div class="flow-root">
+                        <dl class="-my-3 divide-y divide-gray-100 text-sm">
+                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                                <dt class="font-medium text-gray-900 inline-flex items-center">Selfie with new born baby</dt>
+                                <dd class="text-gray-700 sm:col-span-2">
+                                    <x-button xs outline primary label="Click to View"
+                                          x-data=""
+                                          x-on:click.prevent="$dispatch('open-modal', 'view_selfie_modal')"
+                                    />
+
+                                    <x-breeze-modal name="view_selfie_modal">
+                                        <div class="p-6">
+                                            <img src="{{ asset('attachments/'. $milkRequest->requester->requesterVerification?->selfie_path) }}" width="100%" alt="selfie with new born baby">
+                                        </div>
+                                    </x-breeze-modal>
+                                </dd>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                                <dt class="font-medium text-gray-900 inline-flex items-center">Baby Birth Certificate</dt>
+                                <dd class="text-gray-700 sm:col-span-2">
+                                    <x-button xs outline primary label="Click to View"
+                                              x-data=""
+                                              x-on:click.prevent="$dispatch('open-modal', 'view_birth_cert_modal')"
+                                    />
+
+                                    <x-breeze-modal name="view_birth_cert_modal">
+                                        <div class="p-6">
+                                            <img src="{{ asset('attachments/'. $milkRequest->requester->requesterVerification?->birth_cert_path) }}" width="100%" alt="baby birth certificate">
+                                        </div>
+                                    </x-breeze-modal>
+                                </dd>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                                <dt class="font-medium text-gray-900 inline-flex items-center">Request ID</dt>
+                                <dd class="text-gray-700 sm:col-span-2">
+                                    <x-button xs outline primary label="Click to View"
+                                              x-data=""
+                                              x-on:click.prevent="$dispatch('open-modal', 'view_id_modal')"
+                                    />
+
+                                    <x-breeze-modal name="view_id_modal">
+                                        <div class="p-6">
+                                            <label class="text-gray-700 mb-2">
+                                                ID TYPE
+                                                <input class="w-full rounded shadow-md border-gray-400 text-gray-700" type="text"
+                                                       value="{{ $milkRequest->requester->requesterVerification?->id_type }}" readonly>
+                                            </label>
+
+                                            <img src="{{ asset('attachments/'. $milkRequest->requester->requesterVerification?->id_path) }}" width="100%" alt="requester ID">
+                                        </div>
+                                    </x-breeze-modal>
+                                </dd>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                                <dt class="font-medium text-gray-900 inline-flex items-center">Medical Record</dt>
+                                <dd class="text-gray-700 sm:col-span-2">
+                                    <form method="POST"
+                                          action="{{ route('champion.download-requester-medical-record', [$milkRequest->requester->requesterVerification]) }}">
+                                        @csrf
+
+                                        <x-button xs outline primary label="Click to Download" type="submit"/>
+                                    </form>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
                 </x-card>
             </div>
 

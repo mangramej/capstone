@@ -50,6 +50,10 @@
                         <span>Milk Request: <b>{{ $el->data['milk_request']['ref_number'] }}</b></span> <br>
                     @endif
 
+                    @if($el->data['type'] == 'verified')
+                        <span><b>Great, you are now verified.</b></span> <br>
+                    @endif
+
                     <span class="text-gray-600 text-xs">{{ $el->data['message'] }}</span> <br>
                     <span class="mt-2 text-gray-400 text-xs">
                         {{ $el->created_at->diffForHumans() }}

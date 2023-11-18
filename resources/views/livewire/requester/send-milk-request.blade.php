@@ -11,23 +11,23 @@
                     <x-inputs.number wire:model.defer="quantity" label="How many milk bags? *" min="1" />
                 </div>
 
-                <div class="col-span-3 sm:col-span-2">
-                    <span class="text-start text-sm w-full font-medium text-gray-700 dark:text-gray-400">
-                        Upload ID *
-                    </span>
+{{--                <div class="col-span-3 sm:col-span-2">--}}
+{{--                    <span class="text-start text-sm w-full font-medium text-gray-700 dark:text-gray-400">--}}
+{{--                        Upload ID *--}}
+{{--                    </span>--}}
 
-                    <x-filepond wire:model="image" file-type="['image/*']" preview />
+{{--                    <x-filepond wire:model="image" file-type="['image/*']" preview />--}}
 
-                    <span>
-                        @if($errors->get('image'))
-                            <ul class='text-sm text-red-600 space-y-1'>
-                                @foreach ((array) $errors->get('image') as $message)
-                                    <li>{{ $message }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </span>
-                </div>
+{{--                    <span>--}}
+{{--                        @if($errors->get('image'))--}}
+{{--                            <ul class='text-sm text-red-600 space-y-1'>--}}
+{{--                                @foreach ((array) $errors->get('image') as $message)--}}
+{{--                                    <li>{{ $message }}</li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
+{{--                        @endif--}}
+{{--                    </span>--}}
+{{--                </div>--}}
 
 
                 <div class="col-span-3 sm:col-span-1">
@@ -57,14 +57,18 @@
                 </div>
 
                 <div class="col-span-3">
-                    <x-textarea wire:model.defer="comment" label="Comment *" placeholder="Your comment" />
+                    <x-textarea wire:model.defer="comment" label="Additional Comment" placeholder="Your comment" />
                 </div>
 
                 <div class="col-span-3">
                    <div class="flex items-center space-x-2">
                        <x-toggle wire:model.defer="agreed"/>
+
                        <span class="text-sm text-gray-600">I agree to the <a href="#" class="text-sky-600">terms and agreements</a></span>
                    </div>
+                    @error('agreements')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
