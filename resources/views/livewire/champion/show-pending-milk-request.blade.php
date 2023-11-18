@@ -121,7 +121,7 @@
                             </div>
 
                             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                                <dt class="font-medium text-gray-900 inline-flex items-center">Request ID</dt>
+                                <dt class="font-medium text-gray-900 inline-flex items-center">Requester ID</dt>
                                 <dd class="text-gray-700 sm:col-span-2">
                                     <x-button xs outline primary label="Click to View"
                                               x-data=""
