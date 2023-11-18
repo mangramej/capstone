@@ -33,9 +33,11 @@ class RequesterVerificationController extends Controller
         $ext = pathinfo($requesterVerification->medical_record_path, PATHINFO_EXTENSION);
 
         $filename = str($requesterVerification->user->fullname())->slug().'-medical-record.'.$ext;
+//
+//        return Storage::disk('attachments')
+//            ->download($requesterVerification->medical_record_path, $filename);
 
-        return Storage::disk('attachments')
-            ->download($requesterVerification->medical_record_path, $filename);
+        return response()->download(storage_path('app/attachments/'. $requesterVerification->medical_record_path), $filename);
     }
 
     public function update(Request $request, RequesterVerification $requesterVerification)
