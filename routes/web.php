@@ -127,6 +127,9 @@ Route::middleware(['auth', 'verified', 'registered'])->group(function () {
 
             Route::view('/get-verified', 'requester.get-verified')
                 ->name('get-verified');
+
+            Route::get('/download/{milkRequest}', MilkRequestReceiptController::class)
+                ->name('milk-request.download');
         });
 
     // CHAMPION ROUTES

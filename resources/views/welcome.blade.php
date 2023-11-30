@@ -21,7 +21,7 @@
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('home') }}">
-                            <x-logo/>
+                            <x-logo class="w-12 h-12"/>
                         </a>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="w-3/4 space-y-5 text-center pr-24">
-                    <h1 class="text-2xl md:text-4xl font-bold text-[#372008]">Welcome to Baby Passport !</h1>
+                    <h1 class="text-2xl md:text-4xl font-bold text-[#372008]">Welcome!</h1>
 
                     <p class="text-lg text-center leading-relaxed text-[#372008] break-words"> We warmly welcome all
                         women who are looking for the best nutrition for their priceless infants. At our website

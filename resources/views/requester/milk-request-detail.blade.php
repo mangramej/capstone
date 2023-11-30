@@ -2,8 +2,18 @@
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="lg:col-span-3">
+        <div class="lg:col-span-2 flex justify-between">
             <x-button sm secondary label="Go Back" href="{{ url()->previous() }}"/>
+
+            @if(! is_null($milkRequest->accepted_by))
+                <div>
+                    <x-button.circle
+                        icon="document-download"
+                        href="{{ route('requester.milk-request.download', $milkRequest) }}"
+                        secondary
+                    />
+                </div>
+            @endif
         </div>
 
         <div class="col-span-1 lg:col-span-2 space-y-4 px-4 sm:p-0">
